@@ -1,0 +1,159 @@
+{UTF-8}
+BBP  = A FUNCTION OF( Gemiddeld Opleidingsniveau)
+	~	
+	~		|
+
+Eisen advies vwo=A FUNCTION OF(Eisen advies vwo) ~~|
+Eisen advies vwo=
+	~	
+	~		|
+
+Gemiddeld Opleidingsniveau=A FUNCTION OF(Gemiddeld Opleidingsniveau,hbo studenten,Uni studenten\
+		) ~~|
+Gemiddeld Opleidingsniveau=
+	~	
+	~		|
+
+havo leerlingen  = A FUNCTION OF( Eisen advies vwo,"Switchers havo -> vwo","Switchers vwo -> havo"\
+		)
+	~	
+	~		|
+
+hbo studenten  = A FUNCTION OF( havo leerlingen,"Switchers hbo -> uni","Switchers uni -> hbo"\
+		)
+	~	
+	~		|
+
+Moeilijkheidsgraad stof vwo=A FUNCTION OF(Moeilijkheidsgraad stof vwo) ~~|
+Moeilijkheidsgraad stof vwo=
+	~	
+	~		|
+
+Normering eindexamen=A FUNCTION OF(Normering eindexamen) ~~|
+Normering eindexamen=
+	~	
+	~		|
+
+Slagingspercentage vwo  = A FUNCTION OF( Normering eindexamen)
+	~	
+	~		|
+
+"Switchers havo -> vwo"  = A FUNCTION OF( havo leerlingen)
+	~	
+	~		|
+
+"Switchers hbo -> uni"  = A FUNCTION OF( hbo studenten)
+	~	
+	~		|
+
+"Switchers uni -> hbo"  = A FUNCTION OF( Uni studenten)
+	~	
+	~		|
+
+"Switchers vwo -> havo"  = A FUNCTION OF( Moeilijkheidsgraad stof vwo,vwo leerlingen)
+	~	
+	~		|
+
+Uni studenten  = A FUNCTION OF( Slagingspercentage vwo,"Switchers hbo -> uni","Switchers uni -> hbo"\
+		,Vereisten universiteit,vwo leerlingen)
+	~	
+	~		|
+
+Vereisten universiteit  = A FUNCTION OF( )
+	~	
+	~		|
+
+vwo leerlingen  = A FUNCTION OF( BBP,Eisen advies vwo,"Switchers havo -> vwo","Switchers vwo -> havo"\
+		)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2080
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2020
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0625
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Moeilijkheidsgraad stof vwo,634,75,61,19,8,3,0,0,0,0,0,0
+10,2,Eisen advies vwo,150,235,40,19,8,3,0,0,0,0,0,0
+10,3,Vereisten universiteit,968,353,34,19,8,3,0,0,0,0,0,0
+10,4,Normering eindexamen,421,501,61,19,8,3,0,0,0,0,0,0
+10,5,vwo leerlingen,416,303,45,11,8,3,0,0,0,0,0,0
+10,6,havo leerlingen,414,73,49,13,8,131,0,0,0,0,0,0
+10,9,"Switchers vwo -> havo",647,193,57,19,8,3,0,0,0,0,0,0
+1,10,5,9,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(519,233)|
+1,11,9,5,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(532,287)|
+1,12,9,6,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(572,119)|
+10,13,"Switchers havo -> vwo",414,190,49,19,8,3,0,0,0,0,0,0
+1,14,6,13,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(433,74)|
+1,15,13,5,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(397,244)|
+10,16,Slagingspercentage vwo,773,426,61,19,8,3,0,0,0,0,0,0
+1,17,4,16,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(585,446)|
+1,18,1,9,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(635,133)|
+10,22,Uni studenten,907,274,43,11,8,3,0,0,0,0,0,0
+10,23,hbo studenten,900,81,44,11,8,3,0,0,0,0,0,0
+1,24,6,23,1,0,43,0,2,128,0,-1--1--1,|0||-1--1--1,1|(642,20)|
+1,25,5,22,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(656,346)|
+1,26,3,22,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(937,309)|
+10,27,"Switchers hbo -> uni",773,185,46,19,8,3,0,0,0,0,0,0
+10,28,"Switchers uni -> hbo",941,174,53,19,8,3,0,0,0,0,0,0
+1,29,23,27,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(856,151)|
+1,30,27,22,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(825,238)|
+1,31,22,28,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(902,225)|
+1,32,28,23,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(930,129)|
+1,33,13,6,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(395,137)|
+1,34,27,23,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(807,120)|
+1,35,28,22,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(968,223)|
+1,36,16,22,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(869,351)|
+10,37,Gemiddeld Opleidingsniveau,1145,187,36,27,8,131,0,0,0,0,0,0
+1,38,23,37,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1010,110)|
+1,39,22,37,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1055,271)|
+10,40,BBP,1167,411,17,11,8,3,0,0,0,0,0,0
+1,42,37,40,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1208,305)|
+1,43,2,6,0,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(280,154)|
+1,44,2,5,0,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(274,266)|
+1,45,40,5,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1020,487)|
+///---\\\
+:L<%^E!@
+9:Current
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+5:Gemiddeld Opleidingsniveau
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+42:1
+24:0
+25:0
+26:0
