@@ -7,7 +7,7 @@ Vereisten universiteiten  = A FUNCTION OF( )
 	~	
 	~		|
 
-Niveau examen verhogen  = A FUNCTION OF( )
+Niveau VWO verhogen  = A FUNCTION OF( )
 	~	
 	~		|
 
@@ -46,10 +46,10 @@ TIME STEP  = 1
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,2,Vereisten examen verhogen,204,154,57,19,8,3,0,0,0,0,0,0
-10,3,Niveau examen verhogen,106,235,49,19,8,3,0,0,0,0,0,0
-10,6,Hoger advies vereist,143,328,43,19,8,3,0,0,0,0,0,0
-10,7,Vereisten universiteiten,189,412,41,19,8,3,0,0,0,0,0,0
+10,1,Vereisten examen verhogen,202,293,57,19,8,3,0,0,0,0,0,0
+10,2,Niveau VWO verhogen,104,374,45,19,8,3,0,0,0,0,0,0
+10,3,Hoger advies vereist,141,467,43,19,8,3,0,0,0,0,0,0
+10,4,Vereisten universiteiten,187,551,41,19,8,3,0,0,0,0,0,0
 ///---\\\
 :L<%^E!@
 9:Current
@@ -57,7 +57,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 19:100,0
 27:0,
 34:0,
-5:FINAL TIME
+5:Niveau VWO verhogen
 35:Date
 36:YYYY-MM-DD
 37:2000
