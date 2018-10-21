@@ -1,0 +1,332 @@
+{UTF-8}
+PreviousOneYear:
+	(L0-L98) -> MiddleAgeGroups
+	~	
+	~		|
+
+MiddleAgeGroups:
+	(L1-L99)
+	~	
+	~		|
+
+Average life expectancy=
+	SUM(Population[AgeGroups!])/SUM(Deaths[AgeGroups!])
+	~	Year
+	~		|
+
+Life expectancy per age group[AgeGroups]=
+	Population[AgeGroups]/Deaths[AgeGroups]
+	~	
+	~		|
+
+Children:
+	Age0to4,Age5to9,Age10to14,Age15to19
+	~	
+	~		|
+
+Cohorts:
+	(L0-L100)
+	~	
+	~		|
+
+Total population=
+	SUM(Population[AgeGroups!])
+	~	Person
+	~		|
+
+a=
+	1
+	~	Dmnl
+	~		|
+
+AgeGroups:
+	Age0to4,Age5to9,Age10to14,Age15to19,Age20to24,Age25to29,Age30to34,Age35to39,Age40to44\
+		,Age45to49,Age50to54,Age55to59,Age60to64,Age65to69,Age70to74,Age75to79,Age80plus
+	~	
+	~		|
+
+Ageing[AgeGroups]=
+	Population[AgeGroups]/Average time per age group
+	~	Person/Year
+	~		|
+
+AllButYoungestAndOldest:
+	Age5to9,Age10to14,Age15to19,Age20to24,Age25to29,Age30to34,Age35to39,Age40to44,Age45to49\
+		,Age50to54,Age55to59,Age60to64,Age65to69,Age70to74,Age75to79
+	~	
+	~		|
+
+Average age per age group[AgeGroups]=
+	2.5, 7.5, 12.5, 17.5, 22.5, 27.5, 32.5, 37.5, 42.5, 47.5, 52.5 , 57.5, 62.5 , 67.5, \
+		72.5, 77.5, 82.5
+	~	Year
+	~		|
+
+Average fertility per woman= WITH LOOKUP (
+	GDP per capita / Normalisation factor GDP per capita,
+		([(0,0)-(100,8)],(0,7),(5,3.5),(10,2.3),(20,2),(40,1.8),(100,1.6) ))
+	~	Dmnl
+	~		|
+
+Average mortality per age=
+	0.002
+	~	Dmnl
+	~		|
+
+Average time per age group=
+	5
+	~	Year
+	~		|
+
+Births=
+	Average fertility per woman * Relative share women in fertile age * SUM(Population[FertileAge\
+		!])/Years in fertile age
+	~	Person/Year
+	~		|
+
+c=
+	0.05
+	~	Dmnl
+	~		|
+
+Corrected life expectancy factor=
+	Life expectancy * Correction factor life expectancy
+	~	Year
+	~		|
+
+Correction factor life expectancy=
+	1
+	~	Dmnl
+	~		|
+
+Deaths[AgeGroups]=
+	Population[AgeGroups] * Mortality rate[AgeGroups]
+	~	Person/Year
+	~		|
+
+Economic growth=
+	Yearly relative economic growth * GDP
+	~	Euro/Year
+	~		|
+
+FertileAge:
+	Age15to19,Age20to24,Age25to29,Age30to34,Age35to39,Age40to44
+	~	
+	~		|
+
+GDP= INTEG (
+	Economic growth,
+		Initial GDP)
+	~	Euro
+	~		|
+
+GDP per capita=
+	GDP / SUM(Population[AgeGroups!])
+	~	Euro/Person
+	~		|
+
+Initial GDP=
+	6.79e+11
+	~	Euro
+	~		|
+
+Initial population[AgeGroups]= WITH LOOKUP (
+	Average age per age group[AgeGroups],
+		([(0,0)-(83,2e+06)],(2.5,888322),(7.5,929655),(12.5,1.00909e+06),(17.5,1.00099e+06)\
+		,(22.5,1.06903e+06),(27.5,1.05067e+06),(32.5,1.01274e+06),(37.5,1.002e+06),(42.5,1.17686e+06\
+		),(47.5,1.28592e+06),(52.5,1.27918e+06),(57.5,1.15139e+06),(62.5,1.04618e+06),(67.5\
+		,1.01443e+06),(72.5,715743),(77.5,542534),(82.5,734976) ))
+	~	Person
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=7461BEV
+	|
+
+Life expectancy= WITH LOOKUP (
+	GDP per capita / Normalisation factor GDP per capita,
+		([(0,0)-(200,100)],(0,30),(2,50),(5,65),(10,75),(20,78),(40,80),(80,82),(120,83),(200\
+		,84) ))
+	~	Year
+	~		|
+
+Mortality rate[AgeGroups]=
+	a * EXP ( - Corrected life expectancy factor * EXP ( - c * Average age per age group\
+		[AgeGroups]) ) + Average mortality per age
+	~	1/Year
+	~		|
+
+Normalisation factor GDP per capita=
+	1000
+	~	Euro/Person
+	~		|
+
+Population[Age0to4]= INTEG (
+	Births-Ageing[Age0to4]-Deaths[Age0to4],
+		Initial population[Age0to4]) ~~|
+Population[AllButYoungestAndOldest]= INTEG (
+	Ageing[PreviousAgeGroups]-Ageing[AllButYoungestAndOldest]-Deaths[AllButYoungestAndOldest\
+		],
+		Initial population[AllButYoungestAndOldest]) ~~|
+Population[Age80plus]= INTEG (
+	Ageing[Age75to79]-Deaths[Age80plus],
+		Initial population[Age80plus])
+	~	Person
+	~	Ageing[PreviousAgeGroups]-Ageing[AllButYoungestAndOldest]-Deaths[AllButYoun\
+		gestAndOldest]
+	|
+
+PreviousAgeGroups:
+	Age0to4,Age5to9,Age10to14,Age15to19,Age20to24,Age25to29,Age30to34,Age35to39,Age40to44\
+		,Age45to49,Age50to54,Age55to59,Age60to64,Age65to69,Age70to74 -> AllButYoungestAndOldest
+	~	
+	~		|
+
+Relative share women in fertile age=
+	0.5
+	~	Dmnl
+	~		|
+
+Yearly relative economic growth=
+	0.03
+	~	1/Year
+	~		|
+
+Years in fertile age=
+	30
+	~	Year
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2065
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2015
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.03125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+10,1,Population,842,49,46,24,3,131,0,0,0,0,0,0
+12,2,48,578,46,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(745,46)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(636,46)|
+11,5,48,690,46,5,6,34,3,0,0,1,0,0,0
+10,6,Births,690,62,21,10,40,3,0,0,-1,0,0,0
+12,7,48,842,259,10,8,0,3,0,0,-1,0,0,0
+1,8,10,7,4,0,0,22,0,0,0,-1--1--1,,1|(842,209)|
+1,9,10,1,100,0,0,22,0,0,0,-1--1--1,,1|(842,115)|
+11,10,48,842,163,6,5,33,3,0,0,4,0,0,0
+10,11,Deaths,872,163,23,10,40,3,0,0,-1,0,0,0
+1,12,13,1,100,0,0,22,0,0,0,-1--1--1,,1|(943,49)|
+11,13,1836,1004,49,5,6,34,3,0,0,1,0,0,0
+10,14,Ageing,1004,65,24,10,40,3,0,0,-1,0,0,0
+1,15,13,1,4,0,0,22,2,0,0,-1--1--1,|12||0-0-0,4|(1004,-77)|(1004,-77)|(842,-77)|(842,-26)|
+1,16,1,14,1,0,0,0,0,64,0,-1--1--1,,1|(951,93)|
+10,17,Average time per age group,1122,140,58,18,8,3,0,16,0,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+10,18,Initial population,926,119,36,18,8,3,0,0,-1,0,0,0
+1,19,18,1,0,0,0,0,0,64,1,-1--1--1,,1|(892,91)|
+1,20,17,14,0,0,0,0,0,64,0,-1--1--1,,1|(1062,102)|
+10,21,Average age per age group,1017,174,55,18,8,3,0,0,0,0,0,0
+1,22,21,18,0,0,0,0,0,64,0,-1--1--1,,1|(977,149)|
+10,23,Average fertility per woman,664,178,55,18,8,3,0,0,0,0,0,0
+10,24,GDP,556,281,32,16,3,3,0,0,0,0,0,0
+12,25,48,395,281,10,8,0,3,0,0,-1,0,0,0
+1,26,28,24,4,0,0,22,0,0,0,-1--1--1,,1|(496,281)|
+1,27,28,25,100,0,0,22,0,0,0,-1--1--1,,1|(431,281)|
+11,28,48,463,281,5,6,34,3,0,0,1,0,0,0
+10,29,Economic growth,463,305,34,18,40,3,0,0,-1,0,0,0
+10,30,Yearly relative economic growth,367,376,58,18,8,3,0,16,0,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,31,30,29,0,0,0,0,0,64,0,-1--1--1,,1|(408,344)|
+1,32,24,29,1,0,0,0,0,64,0,-1--1--1,,1|(524,325)|
+10,33,Initial GDP,555,249,38,10,8,3,0,0,-1,0,0,0
+1,34,33,24,0,0,0,0,0,64,1,-1--1--1,,1|(555,255)|
+10,35,GDP per capita,730,250,30,18,8,3,0,0,0,0,0,0
+1,36,24,35,1,0,0,0,0,64,0,-1--1--1,,1|(660,281)|
+1,37,1,35,1,0,0,0,0,64,0,-1--1--1,,1|(810,160)|
+1,38,35,23,1,0,0,0,0,64,0,-1--1--1,,1|(676,220)|
+10,39,Normalisation factor GDP per capita,451,174,72,18,8,3,0,16,0,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,40,39,23,0,0,0,0,0,64,0,-1--1--1,,1|(559,175)|
+1,41,23,6,1,0,0,0,0,64,0,-1--1--1,,1|(641,116)|
+10,42,Relative share women in fertile age,467,90,70,18,8,3,0,16,0,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,43,42,6,0,0,0,0,0,64,0,-1--1--1,,1|(596,73)|
+1,44,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(752,100)|
+10,45,Years in fertile age,590,-4,51,18,8,3,0,16,0,0,0,0,-1--1--1,0-0-0,|12|I|0-0-0
+1,46,45,6,0,0,0,0,0,64,0,-1--1--1,,1|(639,29)|
+1,47,1,11,1,0,0,0,0,64,0,-1--1--1,,1|(882,109)|
+10,48,Mortality rate,985,237,46,10,8,3,0,0,-1,0,0,0
+1,49,48,11,0,0,0,0,0,64,0,-1--1--1,,1|(934,203)|
+10,50,a,843,338,6,10,8,3,0,16,-1,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,51,50,48,0,0,0,0,0,64,0,-1--1--1,,1|(903,294)|
+1,52,21,48,0,0,0,0,0,64,0,-1--1--1,,1|(1002,203)|
+10,53,c,1076,369,6,10,8,3,0,16,-1,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,54,53,48,0,0,0,0,0,64,0,-1--1--1,,1|(1034,309)|
+10,55,Corrected life expectancy factor,1025,423,58,18,8,3,0,0,-1,0,0,0
+1,56,55,48,0,0,0,0,0,64,0,-1--1--1,,1|(1006,332)|
+10,57,Average mortality per age,922,381,59,18,8,131,0,16,-1,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,58,57,48,0,0,0,0,0,64,0,-1--1--1,,1|(951,311)|
+10,59,Life expectancy,870,465,37,18,8,3,0,0,0,0,0,0
+1,60,35,59,1,0,0,0,0,64,0,-1--1--1,,1|(778,368)|
+10,61,Normalisation factor GDP per capita,690,473,78,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,62,61,59,0,0,0,0,0,64,0,-1--1--1,,1|(793,468)|
+1,63,59,55,1,0,0,0,0,64,0,-1--1--1,,1|(958,475)|
+10,64,Correction factor life expectancy,1089,493,60,18,8,3,0,16,0,0,0,0,0-0-0,0-0-0,|12|I|0-0-0
+1,65,64,55,0,0,0,0,0,64,0,-1--1--1,,1|(1061,463)|
+10,66,Total population,739,-43,36,18,8,3,0,0,0,0,0,0
+1,67,1,66,0,0,0,0,0,64,0,-1--1--1,,1|(792,4)|
+10,68,Average life expectancy,1241,107,39,19,8,3,0,0,0,0,0,0
+1,69,11,68,0,0,0,0,0,128,0,-1--1--1,,1|(1041,137)|
+1,70,1,68,0,0,0,0,0,128,0,-1--1--1,,1|(1038,76)|
+10,71,Life expectancy per age group,1252,38,63,19,8,3,0,0,0,0,0,0
+1,72,1,71,0,0,0,0,0,128,0,-1--1--1,,1|(1031,43)|
+1,73,11,71,0,0,0,0,0,128,0,-1--1--1,,1|(1037,108)|
+///---\\\
+:L<%^E!@
+9:Current
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+15:0,0,0,1,0,0
+19:90,0
+27:2,
+34:0,
+4:Time
+5:Ageing[AgeGroups]
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+42:0
+24:0
+25:100
+26:100
+6:Age45to49
+6:Age5to9
+6:Age75to79
+6:L0
