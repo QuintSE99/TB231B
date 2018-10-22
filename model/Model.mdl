@@ -1,39 +1,53 @@
 {UTF-8}
-"1-5"=A FUNCTION OF("1-5") ~~|
-"1-5":
-	1-5
-	~	 [8.40779e-45,?]
-	~		|
-
-"6-10"=A FUNCTION OF("6-10") ~~|
-"6-10":
-	6-10
+havo:
+	havo1,havo2,havo3,havo4,havo5
 	~	
 	~		|
 
-Basisschool:
-	Basisschool
+hbo:
+	hbo1,hbo2,hbo3,hbo4
 	~	
 	~		|
 
-inflow=A FUNCTION OF(inflow) ~~|
-inflow=
-	~	 [8.40779e-45,?]
-	~		|
-
-Hoger advies vereist  = A FUNCTION OF( )
+hbomaster:
+	hbomaster1,hbomaster2
 	~	
 	~		|
 
-Vereisten universiteiten  = A FUNCTION OF( )
+hbopremaster:
+	premaster
 	~	
 	~		|
 
-Niveau VWO verhogen  = A FUNCTION OF( )
+mbo:
+	mbo1,mbo2,mbo3,mbo4
 	~	
 	~		|
 
-Vereisten examen verhogen  = A FUNCTION OF( )
+Mensen:
+	basisschool,vmbo1,vmbo2,vmbo3,vmbo4,havo1,havo2,havo3,havo4,havo5,vwo1,vwo2,vwo3,vwo4\
+		,vwo5,vwo6,mbo1,mbo2,mbo3,mbo4,hbo1,hbo2,hbo3,hbo4,wo1,wo2,wo3,hbomaster1,hbomaster2\
+		,premaster,womaster1,womaster2,beroepsbevolking,gepensioneerden
+	~	
+	~		|
+
+vmbo:
+	vmbo1,vmbo2,vmbo3,vmbo4
+	~	
+	~		|
+
+vwo:
+	vwo1,vwo2,vwo3,vwo4,vwo5,vwo6
+	~	
+	~		|
+
+wo:
+	wo1,wo2,wo3
+	~	
+	~		|
+
+womaster:
+	womaster1,womaster2
 	~	
 	~		|
 
@@ -43,35 +57,31 @@ Vereisten examen verhogen  = A FUNCTION OF( )
 		Simulation Control Parameters
 	|
 
-FINAL TIME  = 100
-	~	Month
+FINAL TIME  = 2080
+	~	Year
 	~	The final time for the simulation.
 	|
 
-INITIAL TIME  = 0
-	~	Month
+INITIAL TIME  = 2020
+	~	Year
 	~	The initial time for the simulation.
 	|
 
 SAVEPER  = 
-        TIME STEP
-	~	Month [0,?]
+        TIME STEP 
+	~	Year [0,?]
 	~	The frequency with which output is stored.
 	|
 
-TIME STEP  = 1
-	~	Month [0,?]
+TIME STEP  = 0.0625
+	~	Year [0,?]
 	~	The time step for the simulation.
 	|
 
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
-$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Vereisten examen verhogen,202,293,57,19,8,3,0,0,0,0,0,0
-10,2,Niveau VWO verhogen,104,374,45,19,8,3,0,0,0,0,0,0
-10,3,Hoger advies vereist,141,467,43,19,8,3,0,0,0,0,0,0
-10,4,Vereisten universiteiten,187,551,41,19,8,3,0,0,0,0,0,0
+$0-0-0,0,|0||0-0-0|0-0-0|0-0-0|0-0-0|0-0-0|0,0,100,0
 ///---\\\
 :L<%^E!@
 9:Current
@@ -79,15 +89,16 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 19:100,0
 27:0,
 34:0,
-5:"1-5"
+5:FINAL TIME
 35:Date
 36:YYYY-MM-DD
 37:2000
 38:1
 39:1
-40:2
+40:0
 41:0
 42:1
 24:0
 25:0
 26:0
+6:basisschool
