@@ -87,7 +87,7 @@ Geboorte=
 	~		|
 
 Gemiddelde vruchtbaarheidscijfer=
-	0.0004766
+	2
 	~	Dmnl
 	~	Het aantal kinderen per jaar per duizend vruchtbare vrouwen
 		http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=37422ned&D1=2%2c40-4\
@@ -297,7 +297,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 27:0,
 34:0,
 4:Time
-5:Populatie[Leeftijden]
+5:Total population
 35:Date
 36:YYYY-MM-DD
 37:2000
