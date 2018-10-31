@@ -1,69 +1,31 @@
 {UTF-8}
+Niet leerlingen behalve jongste en oudste:
+	age6to10,age25to30,age31to35,age36to40,age41to45,age46to50,age51to55,age56to60,age61to65\
+		,age66to70,age71to75,age76to80,age81to85,age86to90,age91to95
+	~	
+	~		|
+
+Tijd per leeftijdsgroep[Leerlingen]=
+	1 ~~|
+Tijd per leeftijdsgroep[Niet leerlingen behalve jongste en oudste]=
+	5 ~~|
+Tijd per leeftijdsgroep[age0to5]=
+	6
+	~	
+	~		|
+
 totale sterfte=
 	SUM(sterfte[Leeftijden!])
 	~	
 	~		|
 
-Ouder worden[age11]=
-	Populatie[age11]/1 ~~|
-Ouder worden[age12]=
-	Populatie[age12]/1 ~~|
-Ouder worden[age13]=
-	Populatie[age13]/1 ~~|
-Ouder worden[age14]=
-	Populatie[age14]/1 ~~|
-Ouder worden[age15]=
-	Populatie[age15]/1 ~~|
-Ouder worden[age16]=
-	Populatie[age16]/1 ~~|
-Ouder worden[age17]=
-	Populatie[age17]/1 ~~|
-Ouder worden[age18]=
-	Populatie[age18]/1 ~~|
-Ouder worden[age19]=
-	Populatie[age19]/1 ~~|
-Ouder worden[age20]=
-	Populatie[age20]/1 ~~|
-Ouder worden[age21]=
-	Populatie[age21]/1 ~~|
-Ouder worden[age22]=
-	Populatie[age22]/1 ~~|
-Ouder worden[age23]=
-	Populatie[age23]/1 ~~|
-Ouder worden[age24]=
-	Populatie[age24]/1 ~~|
+Ouder worden[Niet leerlingen behalve jongste en oudste]=
+	Populatie[Niet leerlingen behalve jongste en oudste]/Tijd per leeftijdsgroep[Niet leerlingen behalve jongste en oudste\
+		] ~~|
+Ouder worden[Leerlingen]=
+	Populatie[Leerlingen]/Tijd per leeftijdsgroep[Leerlingen] ~~|
 Ouder worden[age0to5]=
-	Populatie[age0to5]/6 ~~|
-Ouder worden[age6to10]=
-	Populatie[age6to10]/5 ~~|
-Ouder worden[age25to30]=
-	Populatie[age25to30]/5 ~~|
-Ouder worden[age31to35]=
-	Populatie[age31to35]/5 ~~|
-Ouder worden[age36to40]=
-	Populatie[age36to40]/5 ~~|
-Ouder worden[age41to45]=
-	Populatie[age41to45]/5 ~~|
-Ouder worden[age46to50]=
-	Populatie[age46to50]/5 ~~|
-Ouder worden[age51to55]=
-	Populatie[age51to55]/5 ~~|
-Ouder worden[age56to60]=
-	Populatie[age56to60]/5 ~~|
-Ouder worden[age61to65]=
-	Populatie[age61to65]/5 ~~|
-Ouder worden[age66to70]=
-	Populatie[age66to70]/5 ~~|
-Ouder worden[age71to75]=
-	Populatie[age71to75]/5 ~~|
-Ouder worden[age76to80]=
-	Populatie[age76to80]/5 ~~|
-Ouder worden[age81to85]=
-	Populatie[age81to85]/5 ~~|
-Ouder worden[age86to90]=
-	Populatie[age86to90]/5 ~~|
-Ouder worden[age91to95]=
-	Populatie[age91to95]/5
+	Populatie[age0to5]/Tijd per leeftijdsgroep[age0to5]
 	~	
 	~		|
 
@@ -135,12 +97,14 @@ VOkandidaten:
 Aandeel vruchtbare vrouwen=
 	0.503843
 	~	Dmnl
-	~		|
+	~	heb ik berekend, ff bron erbij zetten nog
+	|
 
 Aantal jaar vruchtbaar=
 	35
 	~	Year
-	~		|
+	~	Vrouwen zijn vruchtbaar van 15 tot 50 jaar
+	|
 
 Geboorte=
 	Gemiddelde vruchtbaarheidscijfer*Aandeel vruchtbare vrouwen*SUM(Populatie[vruchtbaar\
@@ -152,6 +116,7 @@ Gemiddelde vruchtbaarheidscijfer=
 	1.61
 	~	Dmnl
 	~	kinderen per vrouw = mensen/mensen = dmnl
+		hebben we opgezocht --> bron
 	|
 
 Populatie[age0to5]= INTEG (
@@ -280,7 +245,8 @@ sterftekans[age91to95]=
 sterftekans[age96plus]=
 	0.32235
 	~	
-	~		|
+	~	bron!!
+	|
 
 havo:
 	havo1,havo2,havo3,havo4,havo5
@@ -352,7 +318,7 @@ INITIAL TIME  = 2020
 	|
 
 SAVEPER  = 
-        TIME STEP 
+        TIME STEP
 	~	Year [0,?]
 	~	The frequency with which output is stored.
 	|
@@ -374,7 +340,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 10,6,sterfte,429,302,25,11,40,3,0,0,-1,0,0,0
 1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(412,45)|(412,50)|(412,112)|
 1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(578,200)|(578,200)|(505,200)|
-11,9,204,578,45,6,8,34,3,0,0,1,0,0,0
+11,9,172,578,45,6,8,34,3,0,0,1,0,0,0
 10,10,Ouder worden,578,71,36,18,40,131,0,0,-1,0,0,0
 12,11,48,180,197,10,8,0,3,0,0,-1,0,0,0
 1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(316,197)|
@@ -390,24 +356,28 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(219,144)|
 1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(465,259)|
 10,24,sterftekans,505,399,36,11,8,3,0,0,0,0,0,0
-10,26,Initial population,598,272,52,11,8,3,0,0,0,0,0,0
-1,28,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(509,356)|
-10,29,Total population,112,426,51,11,8,3,0,0,0,0,0,0
-1,30,1,29,1,0,0,0,0,128,0,-1--1--1,,1|(359,290)|
-1,31,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(480,135)|
-10,32,totale sterfte,645,391,39,11,8,3,0,0,0,0,0,0
-1,33,6,32,0,0,0,0,0,64,0,-1--1--1,,1|(529,343)|
-1,36,26,1,0,0,0,0,0,64,1,-1--1--1,,1|(507,237)|
+10,25,Initial population,598,272,52,11,8,3,0,0,0,0,0,0
+1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(509,356)|
+10,27,Total population,112,426,51,11,8,3,0,0,0,0,0,0
+1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(359,290)|
+1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(480,135)|
+10,30,totale sterfte,645,391,39,11,8,3,0,0,0,0,0,0
+1,31,6,30,0,0,0,0,0,64,0,-1--1--1,,1|(529,343)|
+1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(507,237)|
+10,33,Tijd per leeftijdsgroep,777,41,43,19,8,3,0,0,0,0,0,0
+1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(680,54)|
 ///---\\\
 :L<%^E!@
+1:Current2.vdf
+1:Current1.vdf
 1:Current.vdf
-9:Current
+9:Current2
 15:0,0,0,0,0,0
 19:100,0
 27:0,
 34:0,
 4:Time
-5:Total population
+5:Populatie[Leeftijden]
 35:Date
 36:YYYY-MM-DD
 37:2000
