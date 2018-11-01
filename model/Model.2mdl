@@ -1,69 +1,188 @@
 {UTF-8}
+"4 jarige"=
+	(Populatie[age0to5]/Tijd per leeftijdsgroep[age0to5]) * (1-sterftekans[age0to5])
+	~	
+	~		|
+
+overgang naar middelbaar[vmbo1]=
+	Basisschoolleerlingen/tijd per onderwijsgroep[basisschool] * factor onderwijsgroep[vmbo1\
+		] ~~|
+overgang naar middelbaar[havo1]=
+	Basisschoolleerlingen/tijd per onderwijsgroep[basisschool] * factor onderwijsgroep[havo1\
+		] ~~|
+overgang naar middelbaar[vwo1]=
+	Basisschoolleerlingen/tijd per onderwijsgroep[basisschool] * factor onderwijsgroep[vwo1\
+		]
+	~	
+	~	Het aantal zittenblijvers op de basisschool veranderen niet in ons model. \
+		Het heeft daarom geen impact op de richting van de uitkomsten van het \
+		model. Om die reden negeren wij deze variabele in dit model.
+	|
+
+overgang naar student  = A FUNCTION OF( )
+	~	
+	~		|
+
+afstuderen  = A FUNCTION OF( )
+	~	
+	~		|
+
+allbutfirstandlastyearVO:
+	vmbo2,vmbo3,havo2,havo3,havo4,vwo2,vwo3,vwo4,vwo5
+	~	
+	~		|
+
+allbutfirstyearVO:
+	vmbo2,vmbo3,vmbo4,havo2,havo3,havo4,havo5,vwo2,vwo3,vwo4,vwo5,vwo6
+	~	
+	~		|
+
+allbutlastyearVO:
+	vmbo1,vmbo2,vmbo3,havo1,havo2,havo3,havo4,vwo1,vwo2,vwo3,vwo4,vwo5
+	~	
+	~		|
+
+Basisschoolleerlingen=A FUNCTION OF(Basisschoolleerlingen,"4 jarige",overgang naar middelbaar\
+		,sterfte basisschool) ~~|
+Basisschoolleerlingen= INTEG (
+	"4 jarige"-overgang naar middelbaar[vmbo1]-sterfte basisschool,
+		)
+	~	
+	~		|
+
+Beroepsbevolking  = A FUNCTION OF( afstuderen,-sterfte beroepsbevolking)
+	~	
+	~		|
+
+factor onderwijsgroep[Mensen]  = A FUNCTION OF( )
+	~	
+	~		|
+
+factor reguliere doorstroom[allbutlastyearVO]=
+	1
+	~	
+	~		|
+
+firstyearVO:
+	vmbo1,havo1,vwo1
+	~	
+	~		|
+
+Studenten  = A FUNCTION OF( -afstuderen,overgang naar student,-sterfte studenten)
+	~	
+	~		|
+
+switchers  = A FUNCTION OF( )
+	~	
+	~		|
+
+lastyearVO:
+	vmbo4,havo5,vwo6
+	~	
+	~		|
+
+tijd per onderwijsgroep[basisschool]=
+	8
+	~	
+	~		|
+
+vorigegroepVO:
+	vmbo1,vmbo2,havo1,havo2,havo3,vwo1,vwo2,vwo3,vwo4->allbutfirstandlastyearVO
+	~	
+	~		|
+
+sterfte studenten  = A FUNCTION OF( )
+	~	
+	~		|
+
+reguliere doorstroom[allbutlastyearVO]=
+	Middelbare scholieren[allbutlastyearVO] * factor reguliere doorstroom[allbutlastyearVO\
+		]
+	~	
+	~		|
+
+VO:
+	vmbo1,vmbo2,vmbo3,vmbo4,havo1,havo2,havo3,havo4,havo5,vwo1,vwo2,vwo3,vwo4,vwo5,vwo6
+	~	
+	~		|
+
+sterftekans per onderwijsgroep[basisschool]=
+	8.375e-05 ~~|
+sterftekans per onderwijsgroep[VO]=
+	0.000154
+	~	
+	~	sterftekans VO berekend door een wegingsfactor toe te rekenen aan het aantal klassen \
+		in een jaar dat een bepaalde leeftijd heeft. Dus 3 * sterftekans leeftijd \
+		12 (want vmbo1,havo1,vwo1) ....... en maar 1 * sterftekans leeftijd 18, \
+		want 1 klas 6vwo.
+		
+		http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=37360ned&D1=a&D2=0&D\
+		3=a&D4=l&HDR=G1,T&STB=G2,G3&VW=T
+	|
+
+vorigegroeplastyearVO:
+	vmbo3,havo4,vwo5->lastyearVO
+	~	
+	~		|
+
+sterfte beroepsbevolking  = A FUNCTION OF( )
+	~	
+	~		|
+
+sterfte middelbaar=
+	Middelbare scholieren[VO] * sterftekans per onderwijsgroep[VO]
+	~	
+	~		|
+
+sterfte basisschool=
+	Basisschoolleerlingen * sterftekans per onderwijsgroep[basisschool]
+	~	
+	~		|
+
+Middelbare scholieren=A FUNCTION OF(Middelbare scholieren,overgang naar middelbaar,overgang naar student\
+		,reguliere doorstroom,sterfte middelbaar,switchers) ~~|
+Middelbare scholieren[firstyearVO]= INTEG (
+	overgang naar middelbaar[firstyearVO]-reguliere doorstroom[firstyearVO]-sterfte middelbaar\
+		[firstyearVO],
+		) ~~|
+Middelbare scholieren[allbutfirstandlastyearVO]= INTEG (
+	reguliere doorstroom[vorigegroepVO]-regulieredoorstroom[allbutfirstandlastVO]-sterfte\
+		[allbutfirstandlastVO],
+		) ~~|
+Middelbare scholieren[lastyearVO]= INTEG (
+	reguliere doorstroom[vorigegroeplastyearVO] - overgang naar student - sterfte[lastyearVO\
+		],
+		)
+	~	
+	~		|
+
+Niet leerlingen behalve jongste en oudste:
+	age6to10,age25to30,age31to35,age36to40,age41to45,age46to50,age51to55,age56to60,age61to65\
+		,age66to70,age71to75,age76to80,age81to85,age86to90,age91to95
+	~	
+	~		|
+
+Tijd per leeftijdsgroep[Leerlingen]=
+	1 ~~|
+Tijd per leeftijdsgroep[Niet leerlingen behalve jongste en oudste]=
+	5 ~~|
+Tijd per leeftijdsgroep[age0to5]=
+	6
+	~	
+	~		|
+
 totale sterfte=
 	SUM(sterfte[Leeftijden!])
 	~	
 	~		|
 
-Ouder worden[age11]=
-	Populatie[age11]/1 ~~|
-Ouder worden[age12]=
-	Populatie[age12]/1 ~~|
-Ouder worden[age13]=
-	Populatie[age13]/1 ~~|
-Ouder worden[age14]=
-	Populatie[age14]/1 ~~|
-Ouder worden[age15]=
-	Populatie[age15]/1 ~~|
-Ouder worden[age16]=
-	Populatie[age16]/1 ~~|
-Ouder worden[age17]=
-	Populatie[age17]/1 ~~|
-Ouder worden[age18]=
-	Populatie[age18]/1 ~~|
-Ouder worden[age19]=
-	Populatie[age19]/1 ~~|
-Ouder worden[age20]=
-	Populatie[age20]/1 ~~|
-Ouder worden[age21]=
-	Populatie[age21]/1 ~~|
-Ouder worden[age22]=
-	Populatie[age22]/1 ~~|
-Ouder worden[age23]=
-	Populatie[age23]/1 ~~|
-Ouder worden[age24]=
-	Populatie[age24]/1 ~~|
+Ouder worden[Niet leerlingen behalve jongste en oudste]=
+	Populatie[Niet leerlingen behalve jongste en oudste]/Tijd per leeftijdsgroep[Niet leerlingen behalve jongste en oudste\
+		] ~~|
+Ouder worden[Leerlingen]=
+	Populatie[Leerlingen]/Tijd per leeftijdsgroep[Leerlingen] ~~|
 Ouder worden[age0to5]=
-	Populatie[age0to5]/6 ~~|
-Ouder worden[age6to10]=
-	Populatie[age6to10]/5 ~~|
-Ouder worden[age25to30]=
-	Populatie[age25to30]/5 ~~|
-Ouder worden[age31to35]=
-	Populatie[age31to35]/5 ~~|
-Ouder worden[age36to40]=
-	Populatie[age36to40]/5 ~~|
-Ouder worden[age41to45]=
-	Populatie[age41to45]/5 ~~|
-Ouder worden[age46to50]=
-	Populatie[age46to50]/5 ~~|
-Ouder worden[age51to55]=
-	Populatie[age51to55]/5 ~~|
-Ouder worden[age56to60]=
-	Populatie[age56to60]/5 ~~|
-Ouder worden[age61to65]=
-	Populatie[age61to65]/5 ~~|
-Ouder worden[age66to70]=
-	Populatie[age66to70]/5 ~~|
-Ouder worden[age71to75]=
-	Populatie[age71to75]/5 ~~|
-Ouder worden[age76to80]=
-	Populatie[age76to80]/5 ~~|
-Ouder worden[age81to85]=
-	Populatie[age81to85]/5 ~~|
-Ouder worden[age86to90]=
-	Populatie[age86to90]/5 ~~|
-Ouder worden[age91to95]=
-	Populatie[age91to95]/5
+	Populatie[age0to5]/Tijd per leeftijdsgroep[age0to5]
 	~	
 	~		|
 
@@ -135,12 +254,14 @@ VOkandidaten:
 Aandeel vruchtbare vrouwen=
 	0.503843
 	~	Dmnl
-	~		|
+	~	heb ik berekend, ff bron erbij zetten nog
+	|
 
 Aantal jaar vruchtbaar=
 	35
 	~	Year
-	~		|
+	~	Vrouwen zijn vruchtbaar van 15 tot 50 jaar
+	|
 
 Geboorte=
 	Gemiddelde vruchtbaarheidscijfer*Aandeel vruchtbare vrouwen*SUM(Populatie[vruchtbaar\
@@ -152,6 +273,7 @@ Gemiddelde vruchtbaarheidscijfer=
 	1.61
 	~	Dmnl
 	~	kinderen per vrouw = mensen/mensen = dmnl
+		hebben we opgezocht --> bron
 	|
 
 Populatie[age0to5]= INTEG (
@@ -280,7 +402,8 @@ sterftekans[age91to95]=
 sterftekans[age96plus]=
 	0.32235
 	~	
-	~		|
+	~	bron!!
+	|
 
 havo:
 	havo1,havo2,havo3,havo4,havo5
@@ -352,7 +475,7 @@ INITIAL TIME  = 2020
 	|
 
 SAVEPER  = 
-        TIME STEP 
+        TIME STEP
 	~	Year [0,?]
 	~	The frequency with which output is stored.
 	|
@@ -365,49 +488,118 @@ TIME STEP  = 0.0625
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
-$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Populatie,392,194,40,20,3,3,0,0,0,0,0,0
-12,2,48,396,392,10,8,0,3,0,0,-1,0,0,0
-1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(396,346)|
-1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(396,255)|
-11,5,48,396,302,8,6,33,3,0,0,4,0,0,0
-10,6,sterfte,429,302,25,11,40,3,0,0,-1,0,0,0
-1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(412,45)|(412,50)|(412,112)|
-1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(578,200)|(578,200)|(505,200)|
-11,9,204,578,45,6,8,34,3,0,0,1,0,0,0
-10,10,Ouder worden,578,71,36,18,40,131,0,0,-1,0,0,0
-12,11,48,180,197,10,8,0,3,0,0,-1,0,0,0
-1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(316,197)|
-1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(229,197)|
-11,14,48,275,197,6,8,34,3,0,0,1,0,0,0
-10,15,Geboorte,275,216,31,11,40,3,0,0,-1,0,0,0
-1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(336,242)|
-10,17,Aantal jaar vruchtbaar,97,263,35,19,8,3,0,0,0,0,0,0
-1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(216,257)|
-10,19,Gemiddelde vruchtbaarheidscijfer,227,35,66,19,8,3,0,0,0,0,0,0
-1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(269,139)|
-10,21,Aandeel vruchtbare vrouwen,51,91,62,19,8,3,0,0,0,0,0,0
-1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(219,144)|
-1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(465,259)|
-10,24,sterftekans,505,399,36,11,8,3,0,0,0,0,0,0
-10,26,Initial population,598,272,52,11,8,3,0,0,0,0,0,0
-1,28,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(509,356)|
-10,29,Total population,112,426,51,11,8,3,0,0,0,0,0,0
-1,30,1,29,1,0,0,0,0,128,0,-1--1--1,,1|(359,290)|
-1,31,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(480,135)|
-10,32,totale sterfte,645,391,39,11,8,3,0,0,0,0,0,0
-1,33,6,32,0,0,0,0,0,64,0,-1--1--1,,1|(529,343)|
-1,36,26,1,0,0,0,0,0,64,1,-1--1--1,,1|(507,237)|
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,Populatie,648,-382,40,20,3,3,0,0,0,0,0,0
+12,2,48,652,-184,10,8,0,3,0,0,-1,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(652,-230)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(652,-321)|
+11,5,48,652,-274,8,6,33,3,0,0,4,0,0,0
+10,6,sterfte,685,-274,25,11,40,3,0,0,-1,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(668,-531)|(668,-526)|(668,-464)|
+1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(834,-376)|(834,-376)|(761,-376)|
+11,9,476,834,-531,6,8,34,3,0,0,1,0,0,0
+10,10,Ouder worden,834,-505,36,18,40,131,0,0,-1,0,0,0
+12,11,48,436,-379,10,8,0,3,0,0,-1,0,0,0
+1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(572,-379)|
+1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(485,-379)|
+11,14,48,531,-379,6,8,34,3,0,0,1,0,0,0
+10,15,Geboorte,531,-360,31,11,40,3,0,0,-1,0,0,0
+1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(592,-334)|
+10,17,Aantal jaar vruchtbaar,330,-328,35,19,8,3,0,0,0,0,0,0
+1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(461,-318)|
+10,19,Gemiddelde vruchtbaarheidscijfer,440,-534,66,19,8,3,0,0,0,0,0,0
+1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(510,-437)|
+10,21,Aandeel vruchtbare vrouwen,321,-450,62,19,8,3,0,0,0,0,0,0
+1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(475,-418)|
+1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(721,-317)|
+10,24,sterftekans,732,-150,36,11,8,3,0,0,0,0,0,0
+10,25,Initial population,821,-320,52,11,8,3,0,0,0,0,0,0
+1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(753,-194)|
+10,27,Total population,554,-630,51,11,8,3,0,0,0,0,0,0
+1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(612,-467)|
+1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(736,-440)|
+10,30,totale sterfte,901,-185,39,11,8,3,0,0,0,0,0,0
+1,31,6,30,1,0,0,0,0,64,0,-1--1--1,,1|(787,-263)|
+1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(746,-346)|
+10,33,Tijd per leeftijdsgroep,675,-698,43,19,8,3,0,0,0,0,0,0
+1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(750,-606)|
+10,35,Basisschoolleerlingen,329,246,72,30,3,131,0,0,0,0,0,0
+10,36,Middelbare scholieren,693,233,80,28,3,131,0,0,0,0,0,0
+10,37,Studenten,1077,237,60,29,3,131,0,0,0,0,0,0
+1,39,41,36,4,0,0,22,0,0,0,-1--1--1,,1|(563,234)|
+1,40,41,35,100,0,0,22,0,0,0,-1--1--1,,1|(451,234)|
+11,41,0,507,234,6,8,34,3,0,0,1,0,0,0
+10,42,overgang naar middelbaar,507,261,45,19,40,3,0,0,-1,0,0,0
+12,48,48,30,237,10,8,0,3,0,0,-1,0,0,0
+1,50,52,35,4,0,0,22,0,0,0,-1--1--1,,1|(206,237)|
+1,51,52,48,100,0,0,22,0,0,0,-1--1--1,,1|(91,237)|
+11,52,0,149,237,6,8,34,3,0,0,1,0,0,0
+10,53,"4 jarige",149,256,25,11,40,3,0,0,-1,0,0,0
+10,54,Beroepsbevolking,1461,242,67,32,3,131,0,0,0,0,0,0
+1,56,58,54,4,0,0,22,0,0,0,-1--1--1,,1|(1332,238)|
+1,57,58,37,100,0,0,22,0,0,0,-1--1--1,,1|(1198,238)|
+11,58,0,1265,238,6,8,34,3,0,0,1,0,0,0
+10,59,afstuderen,1265,257,33,11,40,3,0,0,-1,0,0,0
+1,64,1,53,1,1,0,0,0,64,0,-1--1--1,,1|(459,-53)|
+1,65,33,53,1,1,0,0,0,64,0,-1--1--1,,1|(81,-143)|
+1,66,24,53,1,1,0,0,0,64,0,-1--1--1,,1|(446,49)|
+12,67,48,328,492,10,8,0,3,0,0,-1,0,0,0
+1,69,71,67,4,0,0,22,0,0,0,-1--1--1,,1|(328,435)|
+1,70,71,35,100,0,0,22,0,0,0,-1--1--1,,1|(328,325)|
+11,71,0,328,380,8,6,33,3,0,0,4,0,0,0
+10,72,sterfte basisschool,393,380,57,11,40,3,0,0,-1,0,0,0
+12,73,48,686,484,10,8,0,3,0,0,-1,0,0,0
+1,75,77,73,4,0,0,22,0,0,0,-1--1--1,,1|(686,425)|
+1,76,77,36,100,0,0,22,0,0,0,-1--1--1,,1|(686,311)|
+11,77,0,686,368,8,6,33,3,0,0,4,0,0,0
+10,78,sterfte middelbaar,750,368,56,11,40,3,0,0,-1,0,0,0
+12,79,48,1075,484,10,8,0,3,0,0,-1,0,0,0
+1,81,83,79,4,0,0,22,0,0,0,-1--1--1,,1|(1075,426)|
+1,82,83,37,100,0,0,22,0,0,0,-1--1--1,,1|(1075,315)|
+11,83,0,1075,371,8,6,33,3,0,0,4,0,0,0
+10,84,sterfte studenten,1134,371,51,11,40,3,0,0,-1,0,0,0
+12,85,48,1463,477,10,8,0,3,0,0,-1,0,0,0
+1,87,89,85,4,0,0,22,0,0,0,-1--1--1,,1|(1463,423)|
+1,88,89,54,100,0,0,22,0,0,0,-1--1--1,,1|(1463,319)|
+11,89,0,1463,371,8,6,33,3,0,0,4,0,0,0
+10,90,sterfte beroepsbevolking,1528,371,57,19,40,3,0,0,-1,0,0,0
+1,98,100,37,4,0,0,22,0,0,0,-1--1--1,,1|(959,234)|
+1,99,100,36,100,0,0,22,0,0,0,-1--1--1,,1|(831,234)|
+11,100,0,895,234,6,8,34,3,0,0,1,0,0,0
+10,101,overgang naar student,895,261,45,19,40,3,0,0,-1,0,0,0
+1,103,35,42,1,0,0,0,0,64,0,-1--1--1,,1|(429,301)|
+10,104,tijd per onderwijsgroep,378,1,50,19,8,3,0,0,-1,0,0,0
+1,105,104,42,1,0,0,0,0,64,0,-1--1--1,,1|(459,115)|
+10,106,sterftekans per onderwijsgroep,717,706,50,19,8,3,0,0,0,0,0,0
+1,108,35,72,0,0,0,0,0,64,0,-1--1--1,,1|(362,316)|
+1,109,106,72,1,0,0,0,0,64,0,-1--1--1,,1|(424,542)|
+1,114,116,36,4,0,0,22,0,0,0,-1--1--1,,3|(763,172)|(763,172)|(763,188)|
+1,115,116,36,100,0,0,22,0,0,0,-1--1--1,,3|(763,89)|(701,89)|(701,147)|
+11,116,0,763,132,6,8,34,3,0,0,1,0,0,0
+10,117,switchers,763,151,30,11,40,3,0,0,-1,0,0,0
+1,119,121,36,4,0,0,22,0,0,0,-1--1--1,,3|(619,170)|(619,170)|(619,187)|
+1,120,121,36,100,0,0,22,0,0,0,-1--1--1,,3|(619,89)|(681,89)|(681,147)|
+11,121,0,619,112,6,8,34,131,0,0,1,0,0,0
+10,122,reguliere doorstroom,619,139,38,19,40,3,0,0,-1,0,0,0
+10,123,factor reguliere doorstroom,827,2,48,19,8,3,0,0,-1,0,0,0
+1,124,123,122,0,0,0,0,0,64,0,-1--1--1,,1|(728,66)|
+1,125,36,122,0,0,0,0,0,64,0,-1--1--1,,1|(656,186)|
+10,126,factor onderwijsgroep,556,353,50,19,8,3,0,0,-1,0,0,0
+1,127,126,42,0,0,0,0,0,64,0,-1--1--1,,1|(534,313)|
+1,128,36,78,0,0,0,0,0,64,0,-1--1--1,,1|(721,302)|
+1,129,106,78,1,0,0,0,0,64,0,-1--1--1,,1|(754,547)|
 ///---\\\
 :L<%^E!@
+1:Current2.vdf
+1:Current1.vdf
 1:Current.vdf
-9:Current
+9:Current2
 15:0,0,0,0,0,0
-19:100,0
+19:80,0
 27:0,
 34:0,
 4:Time
-5:Total population
+5:Basisschoolleerlingen
 35:Date
 36:YYYY-MM-DD
 37:2000
