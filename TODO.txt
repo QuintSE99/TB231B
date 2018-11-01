@@ -3,6 +3,13 @@
 12 November - deadline
 
 
-initiële waardes opzoeken voor alle stockvariabelen en in een lijstje in de notulen met bron!
+Delay fixed voor overgang naar studenten? hoe houden we rekening met zittenblijvers dan
 
-intiële waardes van zittenblijvers (percentages), alle switchers ook in notulen doc met bron in een lijstje
+
+In ons model kunnen switchers heen en weer switchen (havo->vmbo->havo)
+
+
+Houden we rekening met werkende studenten? hoe?
+
+
+wat doen we met havo/vwo leerlingen ? havo of vwo?
