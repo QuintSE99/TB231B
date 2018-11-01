@@ -1,19 +1,85 @@
 {UTF-8}
+totale sterfte=
+	SUM(sterfte[Leeftijden!])
+	~	
+	~		|
+
+Ouder worden[age11]=
+	Populatie[age11]/1 ~~|
+Ouder worden[age12]=
+	Populatie[age12]/1 ~~|
+Ouder worden[age13]=
+	Populatie[age13]/1 ~~|
+Ouder worden[age14]=
+	Populatie[age14]/1 ~~|
+Ouder worden[age15]=
+	Populatie[age15]/1 ~~|
+Ouder worden[age16]=
+	Populatie[age16]/1 ~~|
+Ouder worden[age17]=
+	Populatie[age17]/1 ~~|
+Ouder worden[age18]=
+	Populatie[age18]/1 ~~|
+Ouder worden[age19]=
+	Populatie[age19]/1 ~~|
+Ouder worden[age20]=
+	Populatie[age20]/1 ~~|
+Ouder worden[age21]=
+	Populatie[age21]/1 ~~|
+Ouder worden[age22]=
+	Populatie[age22]/1 ~~|
+Ouder worden[age23]=
+	Populatie[age23]/1 ~~|
+Ouder worden[age24]=
+	Populatie[age24]/1 ~~|
+Ouder worden[age0to5]=
+	Populatie[age0to5]/6 ~~|
+Ouder worden[age6to10]=
+	Populatie[age6to10]/5 ~~|
+Ouder worden[age25to30]=
+	Populatie[age25to30]/5 ~~|
+Ouder worden[age31to35]=
+	Populatie[age31to35]/5 ~~|
+Ouder worden[age36to40]=
+	Populatie[age36to40]/5 ~~|
+Ouder worden[age41to45]=
+	Populatie[age41to45]/5 ~~|
+Ouder worden[age46to50]=
+	Populatie[age46to50]/5 ~~|
+Ouder worden[age51to55]=
+	Populatie[age51to55]/5 ~~|
+Ouder worden[age56to60]=
+	Populatie[age56to60]/5 ~~|
+Ouder worden[age61to65]=
+	Populatie[age61to65]/5 ~~|
+Ouder worden[age66to70]=
+	Populatie[age66to70]/5 ~~|
+Ouder worden[age71to75]=
+	Populatie[age71to75]/5 ~~|
+Ouder worden[age76to80]=
+	Populatie[age76to80]/5 ~~|
+Ouder worden[age81to85]=
+	Populatie[age81to85]/5 ~~|
+Ouder worden[age86to90]=
+	Populatie[age86to90]/5 ~~|
+Ouder worden[age91to95]=
+	Populatie[age91to95]/5
+	~	
+	~		|
+
+vruchtbaar:
+	age15,age16,age17,age18,age19,age20,age21,age22,age23,age24,age25to30,age31to35,age36to40\
+		,age41to45,age46to50
+	~	
+	~		|
+
 Total population=
 	SUM(Populatie[Leeftijden!])
 	~	
 	~		|
 
-sterfte[age0to10]=
-	Populatie[age0to10]*sterftekans[age0to10] ~~|
-sterfte[Leerlingen]=
-	Populatie[Leerlingen]*sterftekans[Leerlingen] ~~|
-sterfte[age25to50]=
-	Populatie[age25to50]*sterftekans[age25to50] ~~|
-sterfte[age50to65]=
-	Populatie[age50to65]*sterftekans[age50to65] ~~|
-sterfte[age65plus]=
-	Populatie[age65plus]*sterftekans[age65plus]
+sterfte[Leeftijden ]=
+	Populatie[Leeftijden]*sterftekans[Leeftijden]
 	~	
 	~		|
 
@@ -49,14 +115,10 @@ Initial population[age24]=
 	~	https://opendata.cbs.nl/statline/#/CBS/nl/dataset/7461bev/table?dl=5052
 	|
 
-Vruchtbareleeftijd:
-	age15,age16,age17,age18,age19,age20,age21,age22,age23,age24,age25to50
-	~	
-	~		|
-
 Leeftijden:
-	age0to10,age11,age12,age13,age14,age15,age16,age17,age18,age19,age20,age21,age22,age23\
-		,age24,age25to50,age50to65,age65plus
+	age0to5,age6to10,age11,age12,age13,age14,age15,age16,age17,age18,age19,age20,age21,age22\
+		,age23,age24,age25to30,age31to35,age36to40,age41to45,age46to50,age51to55,age56to60,\
+		age61to65,age66to70,age71to75,age76to80,age81to85,age86to90,age91to95,age96plus
 	~	
 	~		|
 
@@ -71,7 +133,7 @@ VOkandidaten:
 	~		|
 
 Aandeel vruchtbare vrouwen=
-	0.5
+	0.503843
 	~	Dmnl
 	~		|
 
@@ -81,51 +143,71 @@ Aantal jaar vruchtbaar=
 	~		|
 
 Geboorte=
-	Gemiddelde vruchtbaarheidscijfer*Aandeel vruchtbare vrouwen*SUM(Populatie[Vruchtbareleeftijd\
+	Gemiddelde vruchtbaarheidscijfer*Aandeel vruchtbare vrouwen*SUM(Populatie[vruchtbaar\
 		!])/Aantal jaar vruchtbaar
 	~	mensen/Year
 	~		|
 
 Gemiddelde vruchtbaarheidscijfer=
-	2
+	1.61
 	~	Dmnl
-	~	Het aantal kinderen per jaar per duizend vruchtbare vrouwen
-		http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=37422ned&D1=2%2c40-4\
-		4&D2=0%2c10%2c20%2c30%2c40%2c50%2c60-67&VW=T
+	~	kinderen per vrouw = mensen/mensen = dmnl
 	|
 
-Ouder worden[age0to10]=
-	Populatie[age0to10]/11 ~~|
-Ouder worden[Leerlingen]=
-	Populatie[Leerlingen] ~~|
-Ouder worden[age25to50]=
-	Populatie[age25to50]/26 ~~|
-Ouder worden[age50to65]=
-	Populatie[age50to65]/15
-	~	
-	~		|
-
-Vruchtbare bevolking:
-	vmbo4,havo4,havo5,vwo4,vwo5,vwo6,mbo1,mbo2,mbo3,premaster,mbo4,hbo1,hbo2,hbo3,hbo4,wo1\
-		,wo2,wo3,hbomaster1,hbomaster2,womaster1,womaster2,beroepsbevolking50min
-	~	
-	~		|
-
-Populatie[age0to10]= INTEG (
-	Geboorte-Ouder worden[age0to10]-sterfte[age0to10],
-		1.80147e+06) ~~|
+Populatie[age0to5]= INTEG (
+	Geboorte-Ouder worden[age0to5]-sterfte[age0to5],
+		872289) ~~|
 Populatie[Leerlingen]= INTEG (
-	Ouder worden[age0to10]-Ouder worden[Leerlingen]-sterfte[Leerlingen],
+	Ouder worden[age6to10]-Ouder worden[Leerlingen]-sterfte[Leerlingen],
 		Initial population[Leerlingen]) ~~|
-Populatie[age25to50]= INTEG (
-	Ouder worden[age24]-Ouder worden[age25to50]-sterfte[age25to50],
-		5.49687e+06) ~~|
-Populatie[age50to65]= INTEG (
-	Ouder worden[age25to50]-Ouder worden[age50to65]-sterfte[age50to65],
-		3.54156e+06) ~~|
-Populatie[age65plus]= INTEG (
-	Ouder worden[age50to65]-sterfte[age65plus],
-		3.15966e+06)
+Populatie[age6to10]= INTEG (
+	Ouder worden[age0to5]-Ouder worden[age6to10]-sterfte[age6to10],
+		929180) ~~|
+Populatie[age25to30]= INTEG (
+	Ouder worden[age24]-Ouder worden[age25to30]-sterfte[age25to30],
+		1.09009e+06) ~~|
+Populatie[age31to35]= INTEG (
+	Ouder worden[age25to30]-Ouder worden[age31to35]-sterfte[age31to35],
+		1.03212e+06) ~~|
+Populatie[age36to40]= INTEG (
+	Ouder worden[age31to35]-Ouder worden[age36to40]-sterfte[age36to40],
+		1.01819e+06) ~~|
+Populatie[age41to45]= INTEG (
+	Ouder worden[age36to40]-Ouder worden[age41to45]-sterfte[age41to45],
+		1.07388e+06) ~~|
+Populatie[age46to50]= INTEG (
+	Ouder worden[age41to45]-Ouder worden[age46to50]-sterfte[age46to50],
+		1.28259e+06) ~~|
+Populatie[age51to55]= INTEG (
+	Ouder worden[age46to50]-Ouder worden[age51to55]-sterfte[age51to55],
+		1.28162e+06) ~~|
+Populatie[age56to60]= INTEG (
+	Ouder worden[age51to55]-Ouder worden[age56to60]-sterfte[age56to60],
+		1.19161e+06) ~~|
+Populatie[age61to65]= INTEG (
+	Ouder worden[age56to60]-Ouder worden[age61to65]-sterfte[age61to65],
+		1.06834e+06) ~~|
+Populatie[age66to70]= INTEG (
+	Ouder worden[age61to65]-Ouder worden[age66to70]-sterfte[age66to70],
+		1.01564e+06) ~~|
+Populatie[age71to75]= INTEG (
+	Ouder worden[age66to70]-Ouder worden[age71to75]-sterfte[age71to75],
+		807859) ~~|
+Populatie[age76to80]= INTEG (
+	Ouder worden[age71to75]-Ouder worden[age76to80]-sterfte[age76to80],
+		571885) ~~|
+Populatie[age81to85]= INTEG (
+	Ouder worden[age76to80]-Ouder worden[age81to85]-sterfte[age81to85],
+		402119) ~~|
+Populatie[age86to90]= INTEG (
+	Ouder worden[age81to85]-Ouder worden[age86to90]-sterfte[age86to90],
+		239804) ~~|
+Populatie[age91to95]= INTEG (
+	Ouder worden[age86to90]-Ouder worden[age91to95]-sterfte[age91to95],
+		98476) ~~|
+Populatie[age96plus]= INTEG (
+	Ouder worden[age91to95]-sterfte[age96plus],
+		23876)
 	~	mensen
 	~	https://opendata.cbs.nl/statline/#/CBS/nl/dataset/7461bev/table?dl=5052
 	|
@@ -135,8 +217,6 @@ Kinderentot20:
 	~	
 	~		|
 
-sterftekans[age0to10]=
-	0.00041 ~~|
 sterftekans[age11]=
 	6e-05 ~~|
 sterftekans[age12]=
@@ -165,12 +245,40 @@ sterftekans[age23]=
 	0.00029 ~~|
 sterftekans[age24]=
 	0.00038 ~~|
-sterftekans[age25to50]=
-	0.00079769 ~~|
-sterftekans[age50to65]=
-	0.005083 ~~|
-sterftekans[age65plus]=
-	0.105119
+sterftekans[age0to5]=
+	0.000683 ~~|
+sterftekans[age6to10]=
+	8.2e-05 ~~|
+sterftekans[age25to30]=
+	0.000332 ~~|
+sterftekans[age31to35]=
+	0.00043 ~~|
+sterftekans[age36to40]=
+	0.000644 ~~|
+sterftekans[age41to45]=
+	0.001002 ~~|
+sterftekans[age46to50]=
+	0.001674 ~~|
+sterftekans[age51to55]=
+	0.002826 ~~|
+sterftekans[age56to60]=
+	0.004678 ~~|
+sterftekans[age61to65]=
+	0.007744 ~~|
+sterftekans[age66to70]=
+	0.011912 ~~|
+sterftekans[age71to75]=
+	0.01977 ~~|
+sterftekans[age76to80]=
+	0.033772 ~~|
+sterftekans[age81to85]=
+	0.063506 ~~|
+sterftekans[age86to90]=
+	0.119528 ~~|
+sterftekans[age91to95]=
+	0.20844 ~~|
+sterftekans[age96plus]=
+	0.32235
 	~	
 	~		|
 
@@ -258,41 +366,43 @@ TIME STEP  = 0.0625
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Populatie,392,200,40,20,3,3,0,0,0,0,0,0
+10,1,Populatie,392,194,40,20,3,3,0,0,0,0,0,0
 12,2,48,396,392,10,8,0,3,0,0,-1,0,0,0
 1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(396,346)|
-1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(396,258)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(396,255)|
 11,5,48,396,302,8,6,33,3,0,0,4,0,0,0
 10,6,sterfte,429,302,25,11,40,3,0,0,-1,0,0,0
-1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(412,50)|(412,50)|(412,115)|
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(412,45)|(412,50)|(412,112)|
 1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(578,200)|(578,200)|(505,200)|
-11,9,572,578,50,6,8,34,3,0,0,1,0,0,0
-10,10,Ouder worden,578,76,36,18,40,131,0,0,-1,0,0,0
+11,9,204,578,45,6,8,34,3,0,0,1,0,0,0
+10,10,Ouder worden,578,71,36,18,40,131,0,0,-1,0,0,0
 12,11,48,180,197,10,8,0,3,0,0,-1,0,0,0
 1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(316,197)|
 1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(229,197)|
 11,14,48,275,197,6,8,34,3,0,0,1,0,0,0
 10,15,Geboorte,275,216,31,11,40,3,0,0,-1,0,0,0
-1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(334,245)|
+1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(336,242)|
 10,17,Aantal jaar vruchtbaar,97,263,35,19,8,3,0,0,0,0,0,0
 1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(216,257)|
 10,19,Gemiddelde vruchtbaarheidscijfer,227,35,66,19,8,3,0,0,0,0,0,0
 1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(269,139)|
 10,21,Aandeel vruchtbare vrouwen,51,91,62,19,8,3,0,0,0,0,0,0
 1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(219,144)|
-1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(461,262)|
+1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(465,259)|
 10,24,sterftekans,505,399,36,11,8,3,0,0,0,0,0,0
-1,48,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(480,140)|
-10,49,Initial population,605,274,52,11,8,3,0,0,0,0,0,0
-1,50,49,1,0,0,0,0,0,64,1,-1--1--1,,1|(509,240)|
-1,51,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(509,356)|
-10,52,Total population,112,426,51,11,8,3,0,0,0,0,0,0
-1,53,1,52,1,0,0,0,0,128,0,-1--1--1,,1|(357,294)|
+10,26,Initial population,598,272,52,11,8,3,0,0,0,0,0,0
+1,28,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(509,356)|
+10,29,Total population,112,426,51,11,8,3,0,0,0,0,0,0
+1,30,1,29,1,0,0,0,0,128,0,-1--1--1,,1|(359,290)|
+1,31,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(480,135)|
+10,32,totale sterfte,645,391,39,11,8,3,0,0,0,0,0,0
+1,33,6,32,0,0,0,0,0,64,0,-1--1--1,,1|(529,343)|
+1,36,26,1,0,0,0,0,0,64,1,-1--1--1,,1|(507,237)|
 ///---\\\
 :L<%^E!@
 1:Current.vdf
 9:Current
-15:0,0,0,1,0,0
+15:0,0,0,0,0,0
 19:100,0
 27:0,
 34:0,
@@ -309,7 +419,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 24:2020
 25:2080
 26:2080
-6:age0to10
+6:age0to5
 6:age11
 6:age12
 6:age13
@@ -324,7 +434,20 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,1
 6:age22
 6:age23
 6:age24
-6:age25to50
-6:age50to65
-6:age65plus
+6:age25to30
+6:age31to35
+6:age36to40
+6:age41to45
+6:age46to50
+6:age51to55
+6:age56to60
+6:age61to65
+6:age66to70
+6:age6to10
+6:age71to75
+6:age76to80
+6:age81to85
+6:age86to90
+6:age91to95
+6:age96plus
 6:basisschool
