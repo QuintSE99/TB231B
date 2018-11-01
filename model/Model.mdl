@@ -694,7 +694,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 27:0,
 34:0,
 4:Time
-5:"4 jarige"
+5:Middelbare scholieren[Mensen]
 35:Date
 36:YYYY-MM-DD
 37:2000
@@ -706,3 +706,35 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,9
 24:2020
 25:2080
 26:2080
+6:age0to5
+6:age11
+6:age12
+6:age13
+6:age14
+6:age15
+6:age16
+6:age17
+6:age18
+6:age19
+6:age20
+6:age21
+6:age22
+6:age23
+6:age24
+6:age25to30
+6:age31to35
+6:age36to40
+6:age41to45
+6:age46to50
+6:age51to55
+6:age56to60
+6:age61to65
+6:age66to70
+6:age6to10
+6:age71to75
+6:age76to80
+6:age81to85
+6:age86to90
+6:age91to95
+6:age96plus
+6:basisschool
