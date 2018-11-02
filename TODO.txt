@@ -13,3 +13,37 @@ Houden we rekening met werkende studenten? hoe?
 
 
 wat doen we met havo/vwo leerlingen ? havo of vwo?
+
+
+doorstroomfactor / doorstudeer factor / werkfactor, hoe modelleren we 
+dat die goed samen lopen en niet meer zijn dan 1
+
+
+
+
+
+
+randvoorwaardes:
+mbo = 4 jaar
+hbo = 4 jaar
+wo = 3 jaar
+vmbo/havo/vwo = 4/5/6 jaar
+zittenblijvers geen rekening mee gehouden
+geen rekening gehouden met mensen die van wo naar hbo gaan
+vmbo moet nog studeren, havo moet ook nog studeren (leerplicht)
+sterftecijfer jonge studenten en oude studenten gelijk
+sterftecijfer middelbaar is een gemiddelde (vrijwel alle)
+hbomaster = 2 jaar
+premaster = 1 jaar
+womaster = 2 jaar
+pensioenleeftijd op 65
+sterfte in werkenden gebaseerd op gemiddelde van 25 t/m 50 jaar
+
+weging onderwijs:
+vwo = 1.5
+mbo = 1
+hbo = 2.5
+wo = 3.5
+hbomaster = 4
+womaster = 5
+
