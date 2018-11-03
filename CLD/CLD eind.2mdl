@@ -1,0 +1,138 @@
+{UTF-8}
+basisschoolleerlingen  = A FUNCTION OF( geborenen)
+	~	
+	~		|
+
+bbp  = A FUNCTION OF( )
+	~	
+	~		|
+
+doorstuderende studenten  = A FUNCTION OF( percentage dat gaat werken en doorstuderen\
+		,studenten)
+	~	
+	~		|
+
+geborenen  = A FUNCTION OF( gemiddeld vruchtbaarheidscijfer,populatie)
+	~	
+	~		|
+
+gemiddeld opleidingsniveau  = A FUNCTION OF( )
+	~	
+	~		|
+
+gemiddeld vruchtbaarheidscijfer  = A FUNCTION OF( bbp)
+	~	
+	~		|
+
+hoog opgeleid  = A FUNCTION OF( doorstuderende studenten,studenten)
+	~	
+	~		|
+
+laag opgeleid  = A FUNCTION OF( middelbare scholieren)
+	~	
+	~		|
+
+middelbaar opgeleid  = A FUNCTION OF( studenten)
+	~	
+	~		|
+
+middelbare scholieren  = A FUNCTION OF( basisschoolleerlingen,percentage dat gaat werken en doorstuderen\
+		)
+	~	
+	~		|
+
+percentage dat gaat werken en doorstuderen  = A FUNCTION OF( )
+	~	
+	~		|
+
+populatie  = A FUNCTION OF( )
+	~	
+	~		|
+
+sterftekans  = A FUNCTION OF( bbp)
+	~	
+	~		|
+
+studenten  = A FUNCTION OF( middelbare scholieren,percentage dat gaat werken en doorstuderen\
+		)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2020
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,populatie,292,215,30,11,8,3,0,0,0,0,0,0
+10,2,geborenen,139,285,34,11,8,3,0,0,0,0,0,0
+10,3,basisschoolleerlingen,438,423,75,19,8,131,0,0,0,0,0,0
+10,4,middelbare scholieren,736,423,36,19,8,3,0,0,0,0,0,0
+10,5,studenten,891,403,31,11,8,3,0,0,0,0,0,0
+10,7,bbp,555,81,14,11,8,3,0,0,0,0,0,0
+10,8,gemiddeld vruchtbaarheidscijfer,158,72,66,19,8,3,0,0,0,0,0,0
+10,9,sterftekans,535,263,35,11,8,3,0,0,0,0,0,0
+10,10,doorstuderende studenten,1073,400,50,19,8,3,0,0,0,0,0,0
+1,11,8,2,1,0,0,0,0,128,0,-1--1--1,,1|(103,208)|
+1,12,1,2,1,0,0,0,0,128,0,-1--1--1,,1|(249,266)|
+1,13,7,8,1,0,0,0,0,128,0,-1--1--1,,1|(323,45)|
+1,14,7,9,1,0,0,0,0,128,0,-1--1--1,,1|(561,190)|
+10,15,percentage dat gaat werken en doorstuderen,959,569,78,19,8,3,0,0,0,0,0,0
+1,16,15,10,1,0,0,0,0,128,0,-1--1--1,,1|(1032,479)|
+1,17,15,5,1,0,0,0,0,128,0,-1--1--1,,1|(891,466)|
+1,19,15,4,1,0,0,0,0,128,0,-1--1--1,,1|(787,487)|
+1,20,3,4,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(580,389)|
+1,21,4,5,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(793,381)|
+1,22,5,10,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(972,365)|
+1,26,2,3,1,0,0,0,0,128,0,-1--1--1,,1|(244,407)|
+10,27,laag opgeleid,730,186,42,11,8,3,0,0,0,0,0,0
+10,28,middelbaar opgeleid,893,185,36,19,8,3,0,0,0,0,0,0
+10,29,hoog opgeleid,1053,179,45,11,8,3,0,0,0,0,0,0
+1,30,4,27,1,0,0,0,0,128,0,-1--1--1,,1|(733,307)|
+1,31,5,28,1,0,0,0,0,128,0,-1--1--1,,1|(891,304)|
+1,33,5,29,1,0,0,0,0,128,0,-1--1--1,,1|(968,279)|
+1,34,10,29,1,0,0,0,0,128,0,-1--1--1,,1|(1063,292)|
+10,35,gemiddeld opleidingsniveau,867,6,52,19,8,3,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+5:FINAL TIME
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+42:1
+24:0
+25:0
+26:0

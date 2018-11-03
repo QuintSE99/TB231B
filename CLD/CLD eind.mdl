@@ -1,0 +1,149 @@
+{UTF-8}
+basisschoolleerlingen  = A FUNCTION OF( geborenen)
+	~	
+	~		|
+
+bbp per capita  = A FUNCTION OF( gemiddeld opleidingsniveau,populatie)
+	~	
+	~		|
+
+doorstuderende studenten  = A FUNCTION OF( percentage dat gaat doorstuderen,studenten\
+		)
+	~	
+	~		|
+
+geborenen  = A FUNCTION OF( gemiddeld vruchtbaarheidscijfer,populatie)
+	~	
+	~		|
+
+gemiddeld opleidingsniveau  = A FUNCTION OF( hoog opgeleid,laag opgeleid,middelbaar opgeleid\
+		)
+	~	
+	~		|
+
+gemiddeld vruchtbaarheidscijfer  = A FUNCTION OF( bbp per capita)
+	~	
+	~		|
+
+hoog opgeleid  = A FUNCTION OF( doorstuderende studenten,studenten)
+	~	
+	~		|
+
+laag opgeleid  = A FUNCTION OF( middelbare scholieren)
+	~	
+	~		|
+
+middelbaar opgeleid  = A FUNCTION OF( studenten)
+	~	
+	~		|
+
+middelbare scholieren  = A FUNCTION OF( basisschoolleerlingen)
+	~	
+	~		|
+
+percentage dat gaat doorstuderen  = A FUNCTION OF( bbp per capita)
+	~	
+	~		|
+
+populatie  = A FUNCTION OF( geborenen,sterftekans)
+	~	
+	~		|
+
+sterftekans  = A FUNCTION OF( bbp per capita)
+	~	
+	~		|
+
+studenten  = A FUNCTION OF( middelbare scholieren,percentage dat gaat doorstuderen)
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2020
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,populatie,444,327,30,11,8,3,0,0,0,0,0,0
+10,2,geborenen,291,397,34,11,8,3,0,0,0,0,0,0
+10,3,basisschoolleerlingen,590,535,75,19,8,131,0,0,0,0,0,0
+10,4,middelbare scholieren,888,535,36,19,8,3,0,0,0,0,0,0
+10,5,studenten,1043,515,31,11,8,3,0,0,0,0,0,0
+10,6,bbp per capita,790,48,46,11,8,3,0,0,0,0,0,0
+10,7,gemiddeld vruchtbaarheidscijfer,310,184,66,19,8,3,0,0,0,0,0,0
+10,8,sterftekans,687,375,35,11,8,3,0,0,0,0,0,0
+10,9,doorstuderende studenten,1225,512,50,19,8,3,0,0,0,0,0,0
+1,10,7,2,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(255,320)|
+1,11,1,2,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(401,378)|
+1,12,6,7,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(496,91)|
+1,13,6,8,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(789,259)|
+1,14,3,4,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(732,501)|
+1,15,4,5,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(945,493)|
+1,16,5,9,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(1124,477)|
+1,17,2,3,1,0,43,0,2,193,0,-1--1--1,|0||-1--1--1,1|(396,519)|
+10,18,laag opgeleid,882,298,42,11,8,3,0,0,0,0,0,0
+10,19,middelbaar opgeleid,1045,297,36,19,8,3,0,0,0,0,0,0
+10,20,hoog opgeleid,1205,291,45,11,8,3,0,0,0,0,0,0
+1,21,4,18,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(885,419)|
+1,22,5,19,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1043,416)|
+1,23,5,20,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1120,391)|
+1,24,9,20,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1215,404)|
+10,25,gemiddeld opleidingsniveau,1046,157,52,19,8,3,0,0,0,0,0,0
+1,26,8,1,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(525,361)|
+1,27,18,25,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(917,225)|
+1,28,19,25,0,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1045,234)|
+1,29,20,25,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1130,212)|
+1,30,2,1,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(321,334)|
+1,31,25,6,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(878,91)|
+1,32,1,6,1,0,45,0,2,192,0,-1--1--1,|0||-1--1--1,1|(611,192)|
+10,33,percentage dat gaat doorstuderen,1415,424,62,19,8,3,0,0,0,0,0,0
+1,34,33,5,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1255,616)|
+1,35,33,9,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1343,487)|
+1,36,6,33,1,0,43,0,2,192,0,-1--1--1,|0||-1--1--1,1|(1246,97)|
+12,37,2,359,357,23,23,4,3,0,0,-1,0,0,0
+12,38,1,674,261,23,23,4,3,0,0,-1,0,0,0
+12,39,2,476,193,23,23,5,3,0,0,-1,0,0,0
+12,40,2,1232,207,23,23,4,3,0,0,-1,0,0,0
+///---\\\
+:L<%^E!@
+9:Current
+15:0,0,0,0,0,0
+19:80,0
+27:0,
+34:0,
+5:bbp per capita
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+42:1
+24:0
+25:0
+26:0

@@ -47,3 +47,6 @@ wo = 3.5
 hbomaster = 4
 womaster = 5
 
+hoe zit het met de units en de delayerrors? wat is de inflow van een delay fixed, hoe initiële waarde
+
+CLD: loop met enerzijds versterkend, anderzijds neutraliserend
