@@ -4,6 +4,8 @@
 
 
 Delay fixed voor overgang naar studenten? hoe houden we rekening met zittenblijvers dan
+delay3 gebruiken met stock als inflow * percentage
+
 
 
 In ons model kunnen switchers heen en weer switchen (havo->vmbo->havo)
@@ -19,6 +21,39 @@ doorstroomfactor / doorstudeer factor / werkfactor, hoe modelleren we
 dat die goed samen lopen en niet meer zijn dan 1
 
 
+
+
+
+
+aantekeningen:
+delay3 gebruiken met stock als inflow * percentage bij basisschool
+
+
+onze doorstromers/afstromers doen opnieuw 4/5/6 jaar
+
+bron: duo.open onderwijstdata
+CBS leerlingen onderwijssoort in detail leerjaar 
+
+middelbare school weer in jaren
+
+shadow variables
+
+initiële waardes 
+
+sterftekans werkenden
+
+alleen doorstromers en afstromers aanpassen voor vermoeilijken vwo
+
+KPI's toevoegen
+
+BBP uitbreiden, invloed op welke variabelen. hoe heeft het invloed op 
+school. 
+
+kosten erbij, stocks meer apart en opsplitsen. wat zijn kosten voor hbo, uni, totaal voor overheid e.d.
+(= KPI, kosten van onderwijs)
+
+
+template invullen! ongeacht wat 
 
 
 
