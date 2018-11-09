@@ -1,45 +1,134 @@
 {UTF-8}
-Aantal jaren werken[vwoafgestudeerd]=
-	47 ~~|
-Aantal jaren werken[mboafgestudeerd]=
-	46 ~~|
-Aantal jaren werken[hboafgestudeerd]=
-	44 ~~|
-Aantal jaren werken[woafgestudeerd]=
-	44 ~~|
-Aantal jaren werken[hbomasterafgestudeerd]=
-	42 ~~|
-Aantal jaren werken[womasterafgestudeerd]=
-	42
-	~	Year
-	~		|
-
-Totaal salaris=
-	Gemiddeld salaris[vwoafgestudeerd]*onderwijsniveau[vwoafgestudeerd] + Gemiddeld salaris\
-		[mboafgestudeerd]*onderwijsniveau[mboafgestudeerd] + Gemiddeld salaris[hboafgestudeerd\
-		]*onderwijsniveau[hboafgestudeerd] + Gemiddeld salaris[woafgestudeerd]*onderwijsniveau\
-		[woafgestudeerd] + Gemiddeld salaris[hbomasterafgestudeerd]*onderwijsniveau[hboafgestudeerd\
-		] + Gemiddeld salaris[womasterafgestudeerd]*onderwijsniveau[womasterafgestudeerd]
+doorstroompercentage[vmbo]=
+	0.95 ~~|
+doorstroompercentage[havo]=
+	0.95 ~~|
+doorstroompercentage[vwo]=
+	0.95
 	~	
 	~		|
 
-BBP per capita=
-	Totaal salaris / Total population
+doorstroomvmbo:
+	vmbo1,vmbo2,vmbo3
 	~	
 	~		|
 
-Gemiddeld salaris[vwoafgestudeerd]=
-	30000 ~~|
-Gemiddeld salaris[mboafgestudeerd]=
-	25000 ~~|
-Gemiddeld salaris[hboafgestudeerd]=
-	36000 ~~|
-Gemiddeld salaris[hbomasterafgestudeerd]=
-	46000 ~~|
-Gemiddeld salaris[womasterafgestudeerd]=
-	60000 ~~|
-Gemiddeld salaris[woafgestudeerd]=
-	50000
+doorstroomvwo:
+	vwo1,vwo2,vwo3,vwo4,vwo5
+	~	
+	~		|
+
+Basisschoolleerlingen= INTEG (
+	"4 jarige"-instroom havo-instroom vmbo-instroom vwo,
+		1.5158e+06)
+	~	mensen
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+doorstroom havo[doorstroomhavo]=
+	middelbaar havo[doorstroomhavo]*doorstroompercentage[havo]
+	~	
+	~		|
+
+doorstroom vmbo[doorstroomvmbo]=
+	middelbaar vmbo[doorstroomvmbo]*doorstroompercentage[vmbo]
+	~	
+	~		|
+
+doorstroom vwo[doorstroomvwo]=
+	middelbaar vwo[doorstroomvwo] * doorstroompercentage[vwo]
+	~	
+	~		|
+
+doorstroomhavo:
+	havo1,havo2,havo3,havo4
+	~	
+	~		|
+
+percentage instromers middelbare school[vmbo]=
+	0.5 ~~|
+percentage instromers middelbare school[havo]=
+	0.3 ~~|
+percentage instromers middelbare school[vwo]=
+	0.2
+	~	
+	~	verhouding vwo,havo,vmbo
+	|
+
+middelbaar vwo[vwo1]= INTEG (
+	instroom vwo,
+		46530) ~~|
+middelbaar vwo[vwo2]= INTEG (
+	doorstroom vwo[vwo1],
+		45385) ~~|
+middelbaar vwo[vwo3]= INTEG (
+	doorstroom vwo[vwo2],
+		45396) ~~|
+middelbaar vwo[vwo4]= INTEG (
+	doorstroom vwo[vwo3],
+		43764) ~~|
+middelbaar vwo[vwo5]= INTEG (
+	doorstroom vwo[vwo4],
+		44696) ~~|
+middelbaar vwo[vwo6]= INTEG (
+	doorstroom vwo[vwo5],
+		40017)
+	~	
+	~		|
+
+instroom havo=
+	DELAY3("4 jarige" * percentage instromers middelbare school[havo], 8 )
+	~	
+	~		|
+
+middelbaar havo[havo1]= INTEG (
+	instroom havo,
+		55000) ~~|
+middelbaar havo[havo2]= INTEG (
+	doorstroom havo[havo1],
+		55000) ~~|
+middelbaar havo[havo3]= INTEG (
+	doorstroom havo[havo2],
+		46303) ~~|
+middelbaar havo[havo4]= INTEG (
+	doorstroom havo[havo3],
+		63378) ~~|
+middelbaar havo[havo5]= INTEG (
+	doorstroom havo[havo4],
+		57136)
+	~	
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+middelbaar vmbo[vmbo1]= INTEG (
+	instroom vmbo,
+		100000) ~~|
+middelbaar vmbo[vmbo2]= INTEG (
+	doorstroom vmbo[vmbo1],
+		100000) ~~|
+middelbaar vmbo[vmbo3]= INTEG (
+	doorstroom vmbo[vmbo2],
+		107038) ~~|
+middelbaar vmbo[vmbo4]= INTEG (
+	doorstroom vmbo[vmbo3],
+		108152)
+	~	
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+instroom vmbo=
+	DELAY3("4 jarige"*percentage instromers middelbare school[vmbo], 8 )
+	~	
+	~		|
+
+instroom vwo=
+	DELAY3("4 jarige"*percentage instromers middelbare school[vwo], 8 )
 	~	
 	~		|
 
@@ -48,377 +137,10 @@ Gemiddeld salaris[woafgestudeerd]=
 	~	mensen/Year
 	~		|
 
-na middelbaar werken[vwo]= DELAY FIXED (
-	overgang naar middelbaar* factor onderwijsgroep[vwo] * percentage dat gaat werken[vwo\
-		], 6 , (Middelbare scholieren[vwo]/6) * percentage dat gaat werken[vwo])
-	~	mensen/Year
-	~		|
-
-overgang naar middelbaar= DELAY FIXED (
-	"4 jarige", tijd per onderwijsgroep[basisschool] , Basisschoolleerlingen/tijd per onderwijsgroep\
-		[basisschool])
-	~	mensen/Year
-	~		|
-
-overgang naar student[vmbo]= DELAY FIXED (
-	Middelbare scholieren[vmbo]/tijd per onderwijsgroep[vmbo] , tijd per onderwijsgroep[\
-		vmbo] , initiele waarde middelbaar[vmbo]/tijd per onderwijsgroep[vmbo]) ~~|
-overgang naar student[havo]= DELAY FIXED (
-	 Middelbare scholieren[havo]/tijd per onderwijsgroep[havo], tijd per onderwijsgroep[\
-		havo] , initiele waarde middelbaar[havo]/tijd per onderwijsgroep[havo]) ~~|
-overgang naar student[vwo]= DELAY FIXED (
-	 Middelbare scholieren[vwo]/tijd per onderwijsgroep[vwo] * (1-percentage dat gaat werken\
-		[vwo]) , tijd per onderwijsgroep[vwo], ((initiele waarde middelbaar[vwo]/tijd per onderwijsgroep\
-		[vwo])*(1-percentage dat gaat werken[vwo])))
-	~	mensen/Year
-	~		|
-
-met pensioen gaan[vwoafgestudeerd]= DELAY FIXED (
-	na middelbaar werken[vwo], 47 , onderwijsniveau[vwoafgestudeerd]/Aantal jaren werken\
-		[vwoafgestudeerd]) ~~|
-met pensioen gaan[mboafgestudeerd]= DELAY FIXED (
-	na studie werken[mbo], 46 , onderwijsniveau[mboafgestudeerd]/Aantal jaren werken[mboafgestudeerd\
-		]) ~~|
-met pensioen gaan[hboafgestudeerd]= DELAY FIXED (
-	na studie werken[hbo], 44 , onderwijsniveau[hboafgestudeerd]/Aantal jaren werken[hboafgestudeerd\
-		]) ~~|
-met pensioen gaan[woafgestudeerd]= DELAY FIXED (
-	na studie werken[wo], 44 , onderwijsniveau[woafgestudeerd]/Aantal jaren werken[woafgestudeerd\
-		]) ~~|
-met pensioen gaan[hbomasterafgestudeerd]= DELAY FIXED (
-	na doorstuderen werken[hbomaster], 42 , onderwijsniveau[hbomasterafgestudeerd]/Aantal jaren werken\
-		[hbomasterafgestudeerd]) ~~|
-met pensioen gaan[womasterafgestudeerd]= DELAY FIXED (
-	na doorstuderen werken[womaster], 42 , onderwijsniveau[womasterafgestudeerd]/Aantal jaren werken\
-		[womasterafgestudeerd])
-	~	mensen/Year
-	~		|
-
-percentage dat gaat werken[vwo]=
-	0.05 ~~|
-percentage dat gaat werken[mbo]=
-	0.5 ~~|
-percentage dat gaat werken[hbo]=
-	0.25 ~~|
-percentage dat gaat werken[wo]=
-	0.5 ~~|
-percentage dat gaat werken[hbomaster]=
-	0.8 ~~|
-percentage dat gaat werken[womaster]=
-	1
-	~	Dmnl/Year
-	~		|
-
-doorstuderen[hbomaster]= DELAY FIXED (
-	overgang naar student[havo]* percentage doorstuderen[hbomaster], 4 , (jonge studenten\
-		[hbo]/tijd per onderwijsgroep[hbo])* percentage doorstuderen[hbomaster]) ~~|
-doorstuderen[premaster]= DELAY FIXED (
-	overgang naar student[havo]* percentage doorstuderen[premaster], 4 , (jonge studenten\
-		[hbo]/tijd per onderwijsgroep[hbo])* percentage doorstuderen[
-	premaster]) ~~|
-doorstuderen[womaster]= DELAY FIXED (
-	overgang naar student[vwo]* percentage doorstuderen[womaster], 3 , (jonge studenten[\
-		wo]/tijd per onderwijsgroep[wo])* percentage doorstuderen
-	[womaster])
-	~	mensen/Year
-	~		|
-
-jonge studenten[mbo]= INTEG (
-	overgang naar student[vmbo]-sterfte jonge studenten[mbo] - na studie werken[mbo] - studentendoorstroom\
-		[mbo],
-		700000) ~~|
-jonge studenten[hbo]= INTEG (
-	overgang naar student[havo]+ studentendoorstroom[mbo] - studentendoorstroom[hbo] - sterfte jonge studenten\
-		[hbo] -doorstuderen[hbomaster] - doorstuderen[premaster] - na studie werken[hbo],
-		500000) ~~|
-jonge studenten[wo]= INTEG (
-	overgang naar student[vwo] + studentendoorstroom[hbo] -sterfte jonge studenten[wo] -\
-		 doorstuderen[womaster] -na studie werken[wo],
-		300000)
-	~	mensen
-	~		|
-
-na studie werken[mbo]= DELAY FIXED (
-	overgang naar student[vmbo] * percentage dat gaat werken[mbo], tijd per onderwijsgroep\
-		[mbo] , (jonge studenten[mbo]/tijd per onderwijsgroep[mbo]) * percentage dat gaat werken\
-		[mbo]) ~~|
-na studie werken[hbo]= DELAY FIXED (
-	overgang naar student[havo] * percentage dat gaat werken[hbo], tijd per onderwijsgroep\
-		[hbo] , (jonge studenten[hbo]/tijd per onderwijsgroep[hbo])*percentage dat gaat werken\
-		[hbo]) ~~|
-na studie werken[wo]= DELAY FIXED (
-	overgang naar student[vwo]*percentage dat gaat werken[wo], tijd per onderwijsgroep[wo\
-		] , (jonge studenten[wo]/tijd per onderwijsgroep [wo])*percentage dat gaat werken[wo\
-		])
-	~	mensen/Year
-	~		|
-
-gemiddeld onderwijsniveau=
-	(onderwijsniveau[vwoafgestudeerd]*onderwijsweging[vwo] + onderwijsniveau[mboafgestudeerd\
-		]*onderwijsweging[mbo] + onderwijsniveau[hboafgestudeerd]*onderwijsweging[hbo] + onderwijsniveau\
-		[woafgestudeerd]*onderwijsweging[wo] + onderwijsniveau[hbomasterafgestudeerd]*onderwijsweging\
-		[hbomaster] + onderwijsniveau[womasterafgestudeerd]*onderwijsweging[womaster] )  /  \
-		SUM(onderwijsniveau[Onderwijsniveausbevolking!])
-	~	Dmnl
-	~		|
-
-onderwijsniveau[vwoafgestudeerd]= INTEG (
-	na middelbaar werken[vwo] - sterfte in werkende[vwoafgestudeerd] - met pensioen gaan\
-		[vwoafgestudeerd],
-		1) ~~|
-onderwijsniveau[mboafgestudeerd]= INTEG (
-	na studie werken[mbo] - sterfte in werkende[mboafgestudeerd] - met pensioen gaan[mboafgestudeerd\
-		],
-		1) ~~|
-onderwijsniveau[hboafgestudeerd]= INTEG (
-	na studie werken[hbo] - sterfte in werkende[hboafgestudeerd] - met pensioen gaan[hboafgestudeerd\
-		],
-		1) ~~|
-onderwijsniveau[woafgestudeerd]= INTEG (
-	na studie werken[wo] - sterfte in werkende[woafgestudeerd] - met pensioen gaan[woafgestudeerd\
-		],
-		1) ~~|
-onderwijsniveau[hbomasterafgestudeerd]= INTEG (
-	na doorstuderen werken[hbomaster] - sterfte in werkende[hbomasterafgestudeerd] - met pensioen gaan\
-		[hbomasterafgestudeerd],
-		1) ~~|
-onderwijsniveau[womasterafgestudeerd]= INTEG (
-	na doorstuderen werken[womaster] - sterfte in werkende[womasterafgestudeerd] - met pensioen gaan\
-		[womasterafgestudeerd],
-		1)
-	~	mensen
-	~		|
-
 Onderwijsniveausbevolking:
 	vwoafgestudeerd,mboafgestudeerd,hboafgestudeerd,woafgestudeerd,hbomasterafgestudeerd\
 		,womasterafgestudeerd
 	~	
-	~		|
-
-sterfte in werkende[vwoafgestudeerd]=
-	onderwijsniveau[vwoafgestudeerd] * sterftekans per onderwijsgroep[werkenden] ~~|
-sterfte in werkende[mboafgestudeerd]=
-	onderwijsniveau[mboafgestudeerd] * sterftekans per onderwijsgroep[werkenden] ~~|
-sterfte in werkende[hboafgestudeerd]=
-	onderwijsniveau[hboafgestudeerd] * sterftekans per onderwijsgroep[werkenden] ~~|
-sterfte in werkende[woafgestudeerd]=
-	onderwijsniveau[woafgestudeerd] * sterftekans per onderwijsgroep[werkenden] ~~|
-sterfte in werkende[hbomasterafgestudeerd]=
-	onderwijsniveau[hbomasterafgestudeerd] * sterftekans per onderwijsgroep[werkenden] ~~|
-sterfte in werkende[womasterafgestudeerd]=
-	onderwijsniveau[womasterafgestudeerd] * sterftekans per onderwijsgroep[werkenden]
-	~	mensen/Year
-	~		|
-
-na doorstuderen werken[hbomaster]= DELAY FIXED (
-	doorstuderen[hbomaster] * percentage dat gaat werken[hbomaster], 2 , (oude studenten\
-		[hbomaster]/2)*percentage dat gaat werken[hbomaster]) ~~|
-na doorstuderen werken[womaster]= DELAY FIXED (
-	doorstuderen[womaster], 2 , (oude studenten[womaster]/2)*percentage dat gaat werken[\
-		womaster])
-	~	mensen/Year
-	~		|
-
-oude studenten[hbomaster]= INTEG (
-	doorstuderen[hbomaster] - sterfte oude studenten[hbomaster] - na doorstuderen werken\
-		[hbomaster],
-		1) ~~|
-oude studenten[premaster]= INTEG (
-	doorstuderen[premaster] - premaster naar womaster - sterfte oude studenten[premaster\
-		],
-		1) ~~|
-oude studenten[womaster]= INTEG (
-	doorstuderen[womaster] + premaster naar womaster - sterfte oude studenten[womaster] \
-		- na doorstuderen werken[womaster],
-		1)
-	~	mensen
-	~		|
-
-sterfte oude studenten[hbomaster]=
-	oude studenten[hbomaster] * sterftekans per onderwijsgroep[studenten] ~~|
-sterfte oude studenten[premaster]=
-	oude studenten[premaster] * sterftekans per onderwijsgroep[studenten] ~~|
-sterfte oude studenten[womaster]=
-	oude studenten[womaster] * sterftekans per onderwijsgroep[studenten]
-	~	mensen/Year
-	~		|
-
-onderwijsweging[vwo]=
-	1.5 ~~|
-onderwijsweging[mbo]=
-	1 ~~|
-onderwijsweging[hbo]=
-	2.5 ~~|
-onderwijsweging[wo]=
-	3.5 ~~|
-onderwijsweging[hbomaster]=
-	4 ~~|
-onderwijsweging[womaster]=
-	5
-	~	Dmnl
-	~		|
-
-Middelbare scholieren[vmbo]= INTEG (
-	overgang naar middelbaar*factor onderwijsgroep[vmbo] + afstromers[havo] - doorstromers\
-		[vmbo] - overgang naar student[vmbo
-	] - sterfte middelbaar[vmbo],
-		initiele waarde middelbaar[vmbo]) ~~|
-Middelbare scholieren[havo]= INTEG (
-	overgang naar middelbaar*factor onderwijsgroep[havo] + afstromers[vwo] - doorstromers\
-		[vmbo] - overgang naar student[havo
-	] -sterfte middelbaar[havo],
-		initiele waarde middelbaar[havo]) ~~|
-Middelbare scholieren[vwo]= INTEG (
-	overgang naar middelbaar*factor onderwijsgroep[vwo] + doorstromers[havo] - afstromers\
-		[vwo] - overgang naar student[vwo]
-	 - sterfte middelbaar[vwo] - na middelbaar werken[vwo],
-		initiele waarde middelbaar[vwo])
-	~	mensen
-	~		|
-
-percentage afstromers[havo]=
-	0.1 ~~|
-percentage afstromers[vwo]=
-	0.1
-	~	Dmnl/Year
-	~		|
-
-percentage doorstromers[vmbo]=
-	0.1 ~~|
-percentage doorstromers[havo]=
-	0.1
-	~	Dmnl/Year
-	~		|
-
-afstromers[havo]=
-	Middelbare scholieren[havo] * percentage afstromers[havo] ~~|
-afstromers[vwo]=
-	Middelbare scholieren[vwo] * percentage afstromers[vwo]
-	~	mensen/Year
-	~		|
-
-Basisschoolleerlingen= INTEG (
-	"4 jarige"-overgang naar middelbaar-sterfte basisschool,
-		900000)
-	~	mensen
-	~		|
-
-doorstromers[vmbo]=
-	Middelbare scholieren[vmbo] * percentage doorstromers[vmbo] ~~|
-doorstromers[havo]=
-	Middelbare scholieren[havo] * percentage doorstromers[havo]
-	~	mensen/Year
-	~		|
-
-factor onderwijsgroep[vmbo]=
-	0.5 ~~|
-factor onderwijsgroep[havo]=
-	0.3 ~~|
-factor onderwijsgroep[vwo]=
-	0.2
-	~	Dmnl
-	~		|
-
-sterfte jonge studenten[mbo]=
-	jonge studenten[mbo]*sterftekans per onderwijsgroep[studenten] ~~|
-sterfte jonge studenten[hbo]=
-	jonge studenten[hbo]*sterftekans per onderwijsgroep[studenten] ~~|
-sterfte jonge studenten[wo]=
-	jonge studenten[wo]*sterftekans per onderwijsgroep[studenten]
-	~	mensen/Year
-	~		|
-
-sterfte middelbaar[vmbo]=
-	Middelbare scholieren[vmbo] * sterftekans per onderwijsgroep[middelbaar] ~~|
-sterfte middelbaar[havo]=
-	Middelbare scholieren[havo] * sterftekans per onderwijsgroep[middelbaar] ~~|
-sterfte middelbaar[vwo]=
-	Middelbare scholieren[havo] * sterftekans per onderwijsgroep[middelbaar]
-	~	mensen/Year
-	~		|
-
-studentendoorstroomfactor[mbo]=
-	0.2 ~~|
-studentendoorstroomfactor[hbo]=
-	0.3
-	~	Dmnl/Year
-	~		|
-
-percentage doorstuderen[hbomaster]=
-	0.25 ~~|
-percentage doorstuderen[premaster]=
-	0.25 ~~|
-percentage doorstuderen[womaster]=
-	0.5
-	~	1/Year
-	~		|
-
-studentendoorstroom[mbo]=
-	jonge studenten[mbo]*studentendoorstroomfactor[mbo] ~~|
-studentendoorstroom[hbo]=
-	jonge studenten[hbo]*studentendoorstroomfactor[hbo]
-	~	mensen/Year
-	~		|
-
-premaster naar womaster=
-	oude studenten[premaster]
-	~	mensen/Year
-	~		|
-
-initiele waarde middelbaar[vmbo]=
-	500000 ~~|
-initiele waarde middelbaar[havo]=
-	200000 ~~|
-initiele waarde middelbaar[vwo]=
-	100000
-	~	mensen
-	~		|
-
-sterftekans per onderwijsgroep[basisschool]=
-	8.375e-05 ~~|
-sterftekans per onderwijsgroep[middelbaar]=
-	0.000154 ~~|
-sterftekans per onderwijsgroep[studenten]=
-	0.000263 ~~|
-sterftekans per onderwijsgroep[werkenden]=
-	0.241625
-	~	Dmnl/Year
-	~	sterftekans VO berekend door een wegingsfactor toe te rekenen aan het aantal klassen \
-		in een jaar dat een bepaalde leeftijd heeft. Dus 3 * sterftekans leeftijd \
-		12 (want vmbo1,havo1,vwo1) ....... en maar 1 * sterftekans leeftijd 18, \
-		want 1 klas 6vwo.
-		
-		sterftekans werkenden gebaseerd op gemiddelde 25 t/m 65
-		
-		http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=37360ned&D1=a&D2=0&D\
-		3=a&D4=l&HDR=G1,T&STB=G2,G3&VW=T
-	|
-
-tijd per onderwijsgroep[basisschool]=
-	8 ~~|
-tijd per onderwijsgroep[hbo]=
-	4 ~~|
-tijd per onderwijsgroep[wo]=
-	3 ~~|
-tijd per onderwijsgroep[mbo]=
-	4 ~~|
-tijd per onderwijsgroep[vmbo]=
-	4 ~~|
-tijd per onderwijsgroep[havo]=
-	5 ~~|
-tijd per onderwijsgroep[vwo]=
-	6
-	~	Year
-	~		|
-
-VO:
-	vmbo,havo,vwo
-	~	
-	~		|
-
-sterfte basisschool=
-	Basisschoolleerlingen * sterftekans per onderwijsgroep[basisschool]
-	~	mensen/Year
 	~		|
 
 Niet leerlingen behalve jongste en oudste:
@@ -666,10 +388,11 @@ sterftekans[age96plus]=
 	|
 
 Mensen:
-	peuters,basisschool,middelbaar,studenten,werkenden,vmbo,havo,vwo,mbo,hbo,wo,hbomaster\
-		,premaster,womaster,vwoafgestudeerd,mboafgestudeerd,hboafgestudeerd,woafgestudeerd,\
-		hbomasterafgestudeerd,womasterafgestudeerd,beroepsbevolking50min, beroepsbevolking50plus\
-		,gepensioneerden
+	peuters,basisschool,middelbaar,studenten,werkenden,vmbo,havo,vwo,vmbo1,vmbo2,vmbo3,vmbo4\
+		,havo1,havo2,havo3,havo4,havo5,vwo1,vwo2,vwo3,vwo4,vwo5,vwo6,mbo1,mbo2,mbo3,mbo4,hbo1\
+		,hbo2,hbo3,hbo4,wo1,wo2,wo3,hbomaster1,hbomaster2,premaster,womaster1,womaster2,vwoafgestudeerd\
+		,mboafgestudeerd,hboafgestudeerd,woafgestudeerd,hbomasterafgestudeerd,womasterafgestudeerd\
+		,beroepsbevolking50min, beroepsbevolking50plus,gepensioneerden
 	~	
 	~		|
 
@@ -703,190 +426,93 @@ TIME STEP  = 0.0625
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
-$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,70,0
-10,1,Populatie,558,-78,40,20,3,3,0,0,0,0,0,0
-12,2,48,562,120,10,8,0,3,0,0,-1,0,0,0
-1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(562,74)|
-1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(562,-17)|
-11,5,48,562,30,8,6,33,3,0,0,4,0,0,0
-10,6,sterfte,595,30,25,11,40,3,0,0,-1,0,0,0
-1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(578,-227)|(578,-222)|(578,-160)|
-1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(744,-72)|(744,-72)|(671,-72)|
-11,9,1516,744,-227,6,8,34,3,0,0,1,0,0,0
-10,10,Ouder worden,744,-201,36,18,40,131,0,0,-1,0,0,0
-12,11,48,346,-75,10,8,0,3,0,0,-1,0,0,0
-1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(482,-75)|
-1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(395,-75)|
-11,14,48,441,-75,6,8,34,3,0,0,1,0,0,0
-10,15,Geboorte,441,-56,31,11,40,3,0,0,-1,0,0,0
-1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(502,-30)|
-10,17,Aantal jaar vruchtbaar,240,-24,35,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(371,-14)|
-10,19,Gemiddelde vruchtbaarheidscijfer,350,-230,66,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(420,-133)|
-10,21,Aandeel vruchtbare vrouwen,222,-146,62,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(383,-115)|
-1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(631,-13)|
-10,24,sterftekans,642,154,36,11,8,3,0,0,0,0,0,0
-10,25,Initial population,731,-16,52,11,8,3,0,0,0,0,0,0
-1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(663,110)|
-10,27,Total population,508,-427,51,11,8,3,0,0,0,0,0,0
-1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(534,-198)|
-1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(646,-136)|
-10,30,totale sterfte,811,119,39,11,8,3,0,0,0,0,0,0
-1,31,6,30,1,0,0,0,0,64,0,-1--1--1,,1|(697,41)|
-1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(656,-42)|
-10,33,Tijd per leeftijdsgroep,625,-315,43,19,8,3,0,0,0,0,0,0
-1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(679,-262)|
-10,35,Basisschoolleerlingen,239,550,72,30,3,131,0,0,0,0,0,0
-10,36,Middelbare scholieren,598,540,80,28,3,131,0,0,0,0,0,0
-1,37,39,36,4,0,0,22,0,0,0,-1--1--1,,1|(469,546)|
-1,38,39,35,100,0,0,22,0,0,0,-1--1--1,,1|(359,546)|
-11,39,524,414,546,6,8,34,3,0,0,1,0,0,0
-10,40,overgang naar middelbaar,414,573,45,19,40,3,0,0,-1,0,0,0
-12,41,48,-60,541,10,8,0,3,0,0,-1,0,0,0
-1,42,44,35,4,0,0,22,0,0,0,-1--1--1,,1|(116,541)|
-1,43,44,41,100,0,0,22,0,0,0,-1--1--1,,1|(1,541)|
-11,44,48,59,541,6,8,34,3,0,0,1,0,0,0
-10,45,"4 jarige",59,560,25,11,40,3,0,0,-1,0,0,0
-1,46,1,45,1,1,0,0,0,64,0,-1--1--1,,1|(369,251)|
-1,47,33,45,1,1,0,0,0,64,0,-1--1--1,,1|(30,180)|
-12,48,48,238,796,10,8,0,3,0,0,-1,0,0,0
-1,49,51,48,4,0,0,22,0,0,0,-1--1--1,,1|(238,739)|
-1,50,51,35,100,0,0,22,0,0,0,-1--1--1,,1|(238,629)|
-11,51,48,238,684,8,6,33,3,0,0,4,0,0,0
-10,52,sterfte basisschool,303,684,57,11,40,3,0,0,-1,0,0,0
-10,53,tijd per onderwijsgroep,313,451,50,19,8,3,0,0,-1,0,0,0
-10,54,sterftekans per onderwijsgroep,768,1063,50,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,55,35,52,0,0,0,0,0,64,0,-1--1--1,,1|(272,620)|
-1,56,54,52,1,0,0,0,0,64,0,-1--1--1,,1|(522,784)|
-1,57,59,36,4,0,0,22,0,0,0,-1--1--1,,3|(674,472)|(674,472)|(674,492)|
-1,58,59,36,100,0,0,22,0,0,0,-1--1--1,,3|(628,389)|(628,393)|(628,452)|
-11,59,972,674,389,6,8,34,131,0,0,1,0,0,0
-10,60,afstromers,674,408,30,11,40,3,0,0,-1,0,0,0
-1,61,63,36,4,0,0,22,0,0,0,-1--1--1,,3|(531,387)|(531,390)|(531,451)|
-1,62,63,36,100,0,0,22,0,0,0,-1--1--1,,1|(577,453)|
-11,63,1068,577,387,6,8,34,3,0,0,1,0,0,0
-10,64,doorstromers,577,406,43,11,40,3,0,0,-1,0,0,0
-10,65,initiele waarde middelbaar,811,412,46,19,8,3,0,2,-1,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,66,65,36,1,0,0,0,3,64,1,192-192-192,|12||0-0-0,1|(749,481)|
-10,67,jonge studenten,907,532,54,31,3,131,0,0,0,0,0,0
-1,68,53,40,1,0,0,0,0,128,0,-1--1--1,,1|(399,476)|
-1,69,35,40,1,0,0,0,0,64,1,-1--1--1,,1|(334,607)|
-10,70,factor onderwijsgroep,469,660,50,19,8,3,0,0,-1,0,0,0
-1,71,73,67,4,0,0,22,0,0,0,-1--1--1,,1|(813,536)|
-1,72,73,36,100,0,0,22,0,0,0,-1--1--1,,1|(720,536)|
-11,73,492,768,536,6,8,34,3,0,0,1,0,0,0
-10,74,overgang naar student,768,563,45,19,40,3,0,0,-1,0,0,0
-12,75,48,566,786,10,8,0,3,0,0,-1,0,0,0
-1,76,78,75,4,0,0,22,0,0,0,-1--1--1,,1|(563,758)|
-1,77,78,36,100,0,0,22,0,0,0,-1--1--1,,1|(563,647)|
-11,78,48,563,732,8,6,33,131,0,0,4,0,0,0
-10,79,sterfte middelbaar,627,732,56,11,40,3,0,0,-1,0,0,0
-10,80,percentage afstromers,716,280,35,19,8,3,0,0,0,0,0,0
-10,81,percentage doorstromers,464,273,43,19,8,3,0,0,0,0,0,0
-1,82,81,64,1,0,0,0,0,128,0,-1--1--1,,1|(565,312)|
-1,83,80,60,1,0,0,0,0,128,0,-1--1--1,,1|(672,332)|
-1,84,36,64,0,0,0,0,0,64,0,-1--1--1,,1|(587,471)|
-1,85,36,60,0,0,0,0,0,64,0,-1--1--1,,1|(637,471)|
-1,86,54,79,1,0,0,0,0,128,0,-1--1--1,,1|(699,833)|
-1,87,36,79,1,0,0,0,0,64,0,-1--1--1,,1|(576,614)|
-1,88,65,74,0,0,0,0,0,64,1,-1--1--1,,1|(791,480)|
-1,89,70,36,0,0,0,0,0,64,0,-1--1--1,,1|(522,609)|
-1,90,92,67,4,0,0,22,0,0,0,-1--1--1,,3|(932,398)|(865,398)|(865,449)|
-1,91,92,67,100,0,0,22,0,0,0,-1--1--1,,1|(932,458)|
-11,92,1132,932,407,6,8,34,3,0,0,1,0,0,0
-10,93,studentendoorstroom,932,435,40,20,40,3,0,0,-1,0,0,0
-1,94,67,93,1,0,0,0,0,128,0,-1--1--1,,1|(902,461)|
-10,95,studentendoorstroomfactor,1054,328,105,16,8,131,0,0,0,0,0,0
-1,96,95,93,1,0,0,0,0,128,0,-1--1--1,,1|(1005,384)|
-10,97,oude studenten,1221,537,58,31,3,131,0,0,0,0,0,0
-1,98,100,97,4,0,0,22,0,0,0,-1--1--1,,1|(1111,534)|
-1,99,100,67,100,0,0,22,0,0,0,-1--1--1,,1|(1004,534)|
-11,100,1004,1053,534,6,8,34,3,0,0,1,0,0,0
-10,101,doorstuderen,1053,553,42,11,40,3,0,0,-1,0,0,0
-12,102,48,881,810,10,8,0,3,0,0,-1,0,0,0
-1,103,105,102,4,0,0,22,0,0,0,-1--1--1,,1|(876,773)|
-1,104,105,67,100,0,0,22,0,0,0,-1--1--1,,1|(876,647)|
-11,105,48,876,738,8,6,33,131,0,0,4,0,0,0
-10,106,sterfte jonge studenten,924,738,40,19,40,3,0,0,-1,0,0,0
-1,107,54,106,1,0,0,0,0,128,0,-1--1--1,,1|(854,815)|
-1,108,67,106,1,0,0,0,0,64,0,-1--1--1,,1|(895,607)|
-10,109,percentage doorstuderen,1115,412,43,19,8,3,0,0,0,0,0,0
-1,110,109,101,1,0,0,0,0,128,0,-1--1--1,,1|(1047,458)|
-1,111,74,101,1,0,0,0,0,128,0,-1--1--1,,1|(887,601)|
-1,112,67,101,0,0,0,0,0,64,1,-1--1--1,,1|(979,541)|
-1,113,115,97,4,0,0,22,0,0,0,-1--1--1,,3|(1254,416)|(1181,416)|(1181,461)|
-1,114,115,97,100,0,0,22,0,0,0,-1--1--1,,1|(1254,469)|
-11,115,812,1254,425,6,8,34,3,0,0,1,0,0,0
-10,116,premaster naar womaster,1254,452,48,19,40,3,0,0,-1,0,0,0
-1,117,97,116,0,0,0,0,0,64,0,-1--1--1,,1|(1237,495)|
-12,118,48,1183,797,10,8,0,3,0,0,-1,0,0,0
-1,119,121,118,4,0,0,22,0,0,0,-1--1--1,,1|(1181,757)|
-1,120,121,97,100,0,0,22,0,0,0,-1--1--1,,1|(1181,641)|
-11,121,48,1181,720,8,6,33,3,0,0,4,0,0,0
-10,122,sterfte oude studenten,1227,720,38,19,40,3,0,0,-1,0,0,0
-1,123,54,122,1,0,0,0,0,128,0,-1--1--1,,1|(991,895)|
-1,124,97,122,1,0,0,0,0,64,0,-1--1--1,,1|(1198,610)|
-10,125,onderwijsniveau,1504,642,65,40,3,131,0,0,0,0,0,0
-10,126,gemiddeld onderwijsniveau,1600,490,52,19,8,3,0,0,0,0,0,0
-1,127,125,126,1,0,0,0,0,128,0,-1--1--1,,1|(1568,580)|
-1,128,130,125,4,0,0,22,0,0,0,-1--1--1,,1|(1095,663)|
-1,129,130,36,100,0,0,22,0,0,0,-1--1--1,,1|(598,663)|
-11,130,892,746,663,6,8,34,3,0,0,1,0,0,0
-10,131,na middelbaar werken,746,690,45,19,40,3,0,0,-1,0,0,0
-1,132,134,125,4,0,0,22,0,0,0,-1--1--1,,1|(1252,638)|
-1,133,134,67,100,0,0,22,0,0,0,-1--1--1,,1|(907,638)|
-11,134,428,1059,638,6,8,34,3,0,0,3,0,0,0
-10,135,na studie werken,1059,610,39,20,40,131,0,0,0,0,0,0
-1,136,138,125,4,0,0,22,0,0,0,-1--1--1,,1|(1373,619)|
-1,137,138,97,100,0,0,22,0,0,0,-1--1--1,,1|(1221,619)|
-11,138,668,1301,619,6,8,34,3,0,0,3,0,0,0
-10,139,na doorstuderen werken,1301,592,52,19,40,3,0,0,-1,0,0,0
-10,140,percentage dat gaat werken,1081,1092,62,19,8,3,0,0,0,0,0,0
-1,141,140,131,1,0,0,0,0,128,0,-1--1--1,,1|(771,851)|
-1,142,140,74,1,0,0,0,0,128,0,-1--1--1,,1|(816,759)|
-1,143,140,135,1,0,0,0,0,128,0,-1--1--1,,1|(1070,858)|
-1,144,140,139,1,0,0,0,0,128,0,-1--1--1,,1|(1338,753)|
-1,145,36,131,0,0,0,0,0,64,1,-1--1--1,,1|(671,614)|
-1,146,67,135,1,0,0,0,0,128,1,-1--1--1,,1|(969,613)|
-1,147,97,139,1,0,0,0,0,128,1,-1--1--1,,1|(1311,554)|
-1,148,40,131,0,0,0,0,0,64,0,-1--1--1,,1|(573,628)|
-1,149,74,135,0,0,0,0,0,64,0,-1--1--1,,1|(909,585)|
-1,150,101,139,0,0,0,0,0,64,0,-1--1--1,,1|(1165,569)|
-12,151,48,1813,645,10,8,0,3,0,0,-1,0,0,0
-1,152,154,151,4,0,0,22,0,0,0,-1--1--1,,1|(1744,643)|
-1,153,154,125,100,0,0,22,0,0,0,-1--1--1,,1|(1621,643)|
-11,154,48,1679,643,6,8,34,3,0,0,1,0,0,0
-10,155,met pensioen gaan,1679,662,58,11,40,3,0,0,-1,0,0,0
-12,156,48,1502,824,10,8,0,3,0,0,-1,0,0,0
-1,157,159,156,4,0,0,22,0,0,0,-1--1--1,,1|(1502,785)|
-1,158,159,125,100,0,0,22,0,0,0,-1--1--1,,1|(1502,712)|
-11,159,48,1502,749,8,6,33,3,0,0,4,0,0,0
-10,160,sterfte in werkende,1570,749,60,11,40,3,0,0,-1,0,0,0
-1,161,54,160,1,0,0,0,0,128,0,-1--1--1,,1|(1514,924)|
-1,162,125,160,1,0,0,0,0,128,0,-1--1--1,,1|(1548,722)|
-1,163,139,155,1,0,0,0,0,128,0,-1--1--1,,1|(1498,559)|
-1,164,135,155,1,0,0,0,0,128,0,-1--1--1,,1|(1434,733)|
-1,165,131,155,1,0,0,0,0,128,0,-1--1--1,,1|(1369,769)|
-1,166,125,155,1,0,0,0,0,128,1,-1--1--1,,1|(1607,668)|
-10,167,onderwijsweging,1431,379,53,11,8,3,0,0,0,0,0,0
-1,168,167,126,1,0,0,0,0,128,0,-1--1--1,,1|(1569,414)|
-1,169,70,131,0,0,0,0,0,64,0,-1--1--1,,1|(603,674)|
-1,170,45,40,1,0,0,0,0,128,0,-1--1--1,,1|(203,487)|
-10,171,Aantal jaren werken,1714,773,39,19,8,3,0,0,0,0,0,0
-1,172,171,155,0,0,0,0,0,64,1,-1--1--1,,1|(1697,720)|
-1,173,53,101,1,0,0,0,0,64,1,-1--1--1,,1|(884,481)|
-1,174,53,135,0,0,0,0,0,64,0,-1--1--1,,1|(684,529)|
-1,175,36,74,0,0,0,0,0,64,0,-1--1--1,,1|(693,552)|
-1,176,53,74,0,0,0,0,0,64,0,-1--1--1,,1|(536,505)|
-10,177,Gemiddeld salaris,1521,165,56,11,8,3,0,0,0,0,0,0
-10,178,Totaal salaris,1181,180,42,11,8,3,0,0,0,0,0,0
-1,179,177,178,0,0,0,0,0,64,0,-1--1--1,,1|(1350,173)|
-1,180,125,178,0,0,0,0,0,64,0,-1--1--1,,1|(1336,402)|
-10,181,BBP per capita,1119,-35,39,24,8,131,0,0,0,0,0,0
-1,182,178,181,0,0,0,0,0,64,0,-1--1--1,,1|(1153,86)|
-1,183,27,181,1,0,0,0,0,64,0,-1--1--1,,1|(769,-391)|
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
+10,1,Populatie,654,-291,40,20,3,3,0,0,0,0,0,0
+12,2,48,658,-93,10,8,0,3,0,0,-1,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(658,-139)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(658,-230)|
+11,5,48,658,-183,8,6,33,3,0,0,4,0,0,0
+10,6,sterfte,691,-183,25,11,40,3,0,0,-1,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(674,-440)|(674,-435)|(674,-373)|
+1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(840,-285)|(840,-285)|(767,-285)|
+11,9,1516,840,-440,6,8,34,3,0,0,1,0,0,0
+10,10,Ouder worden,840,-414,36,18,40,131,0,0,-1,0,0,0
+12,11,48,442,-288,10,8,0,3,0,0,-1,0,0,0
+1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(578,-288)|
+1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(491,-288)|
+11,14,48,537,-288,6,8,34,3,0,0,1,0,0,0
+10,15,Geboorte,537,-269,31,11,40,3,0,0,-1,0,0,0
+1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(598,-243)|
+10,17,Aantal jaar vruchtbaar,336,-237,35,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(467,-227)|
+10,19,Gemiddelde vruchtbaarheidscijfer,446,-443,66,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(516,-346)|
+10,21,Aandeel vruchtbare vrouwen,318,-359,62,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(479,-328)|
+1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(727,-226)|
+10,24,sterftekans,738,-59,36,11,8,3,0,0,0,0,0,0
+10,25,Initial population,827,-229,52,11,8,3,0,0,0,0,0,0
+1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(759,-103)|
+10,27,Total population,604,-640,51,11,8,3,0,0,0,0,0,0
+1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(630,-411)|
+1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(742,-349)|
+10,30,totale sterfte,907,-94,39,11,8,3,0,0,0,0,0,0
+1,31,6,30,1,0,0,0,0,64,0,-1--1--1,,1|(793,-172)|
+1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(752,-255)|
+10,33,Tijd per leeftijdsgroep,721,-528,43,19,8,3,0,0,0,0,0,0
+1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(775,-475)|
+10,35,Basisschoolleerlingen,335,337,72,30,3,131,0,0,0,0,0,0
+12,36,48,36,328,10,8,0,3,0,0,-1,0,0,0
+1,37,39,35,4,0,0,22,0,0,0,-1--1--1,,1|(212,328)|
+1,38,39,36,100,0,0,22,0,0,0,-1--1--1,,1|(97,328)|
+11,39,48,155,328,6,8,34,3,0,0,1,0,0,0
+10,40,"4 jarige",155,347,25,11,40,3,0,0,-1,0,0,0
+1,41,1,40,1,1,0,0,0,64,0,-1--1--1,,1|(465,38)|
+1,42,33,40,1,1,0,0,0,64,0,-1--1--1,,1|(126,-33)|
+10,43,middelbaar vmbo,696,142,61,26,3,131,0,0,0,0,0,0
+10,44,middelbaar havo,702,340,61,26,3,131,0,0,0,0,0,0
+10,45,middelbaar vwo,696,558,61,26,3,131,0,0,0,0,0,0
+1,46,48,44,4,0,0,22,0,0,0,-1--1--1,,1|(604,337)|
+1,47,48,35,100,0,0,22,0,0,0,-1--1--1,,1|(481,337)|
+11,48,0,561,337,6,8,34,3,0,0,1,0,0,0
+10,49,instroom havo,561,356,45,11,40,3,0,0,-1,0,0,0
+1,50,52,43,4,0,0,22,0,0,0,-1--1--1,,3|(492,137)|(513,137)|(574,137)|
+1,51,52,35,100,0,0,22,0,0,0,-1--1--1,,1|(492,337)|
+11,52,0,492,229,8,6,33,3,0,0,4,0,0,0
+10,53,instroom vmbo,547,229,47,11,40,3,0,0,-1,0,0,0
+1,54,56,45,4,0,0,22,0,0,0,-1--1--1,,3|(492,532)|(492,532)|(492,558)|
+1,55,56,35,100,0,0,22,0,0,0,-1--1--1,,1|(492,337)|
+11,56,0,492,455,8,6,33,3,0,0,4,0,0,0
+10,57,instroom vwo,543,455,43,11,40,3,0,0,-1,0,0,0
+10,58,percentage instromers middelbare school,347,209,70,19,8,3,0,0,0,0,0,0
+1,59,58,52,1,0,0,0,0,128,0,-1--1--1,,1|(446,227)|
+10,60,percentage instromers middelbare school,603,403,74,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,61,60,57,0,0,0,0,0,128,0,-1--1--1,,1|(573,428)|
+1,62,60,49,0,0,0,0,0,128,0,-1--1--1,,1|(583,380)|
+1,63,65,43,4,0,0,22,0,0,0,-1--1--1,,3|(743,26)|(654,26)|(654,71)|
+1,64,65,43,100,0,0,22,0,0,0,-1--1--1,,1|(743,89)|
+11,65,0,743,54,6,8,34,3,0,0,1,0,0,0
+10,66,doorstroom vmbo,743,73,57,11,40,3,0,0,-1,0,0,0
+1,67,69,44,4,0,0,22,0,0,0,-1--1--1,,3|(746,221)|(660,221)|(660,267)|
+1,68,69,44,100,0,0,22,0,0,0,-1--1--1,,1|(746,290)|
+11,69,0,746,258,6,8,34,3,0,0,1,0,0,0
+10,70,doorstroom havo,746,277,54,11,40,3,0,0,-1,0,0,0
+1,71,73,45,4,0,0,22,0,0,0,-1--1--1,,3|(740,452)|(645,452)|(645,492)|
+1,72,73,45,100,0,0,22,0,0,0,-1--1--1,,1|(740,508)|
+11,73,0,740,477,6,8,34,131,0,0,1,0,0,0
+10,74,doorstroom vwo,740,496,53,11,40,3,0,0,-1,0,0,0
+10,75,doorstroompercentage,885,78,40,20,8,3,0,0,0,0,0,0
+10,76,doorstroompercentage,881,265,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+10,77,doorstroompercentage,863,481,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,78,75,66,1,0,0,0,0,128,0,-1--1--1,,1|(810,45)|
+1,79,76,70,1,0,0,0,0,128,0,-1--1--1,,1|(798,249)|
+1,80,77,74,1,0,0,0,0,128,0,-1--1--1,,1|(780,460)|
+1,81,43,66,0,0,0,0,0,128,0,-1--1--1,,1|(720,105)|
+1,82,44,70,0,0,0,0,0,128,0,-1--1--1,,1|(725,306)|
+1,83,45,74,0,0,0,0,0,128,0,-1--1--1,,1|(718,525)|
+1,84,40,53,1,0,0,0,0,64,0,-1--1--1,,1|(325,266)|
+1,85,40,49,1,0,0,0,0,64,0,-1--1--1,,1|(338,383)|
+1,86,40,57,1,0,0,0,0,64,0,-1--1--1,,1|(342,419)|
 ///---\\\
 :L<%^E!@
 1:Current2.vdf
@@ -894,11 +520,11 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,7
 1:Current.vdf
 9:Current2
 15:0,0,0,0,0,0
-19:70,0
+19:80,0
 27:0,
 34:0,
 4:Time
-5:gemiddeld onderwijsniveau
+5:doorstroompercentage[Mensen]
 35:Date
 36:YYYY-MM-DD
 37:2000
@@ -916,21 +542,46 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,7
 6:beroepsbevolking50plus
 6:gepensioneerden
 6:havo
-6:hbo
+6:havo1
+6:havo2
+6:havo3
+6:havo4
+6:havo5
+6:hbo1
+6:hbo2
+6:hbo3
+6:hbo4
 6:hboafgestudeerd
-6:hbomaster
+6:hbomaster1
+6:hbomaster2
 6:hbomasterafgestudeerd
-6:mbo
+6:mbo1
+6:mbo2
+6:mbo3
+6:mbo4
 6:mboafgestudeerd
 6:middelbaar
 6:peuters
 6:premaster
 6:studenten
 6:vmbo
+6:vmbo1
+6:vmbo2
+6:vmbo3
+6:vmbo4
 6:vwo
+6:vwo1
+6:vwo2
+6:vwo3
+6:vwo4
+6:vwo5
+6:vwo6
 6:vwoafgestudeerd
 6:werkenden
-6:wo
+6:wo1
+6:wo2
+6:wo3
 6:woafgestudeerd
-6:womaster
+6:womaster1
+6:womaster2
 6:womasterafgestudeerd
