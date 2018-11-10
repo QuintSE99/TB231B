@@ -1,12 +1,396 @@
 {UTF-8}
-doorstroompercentage[vmbo]=
-	0.95 ~~|
-doorstroompercentage[havo]=
-	0.95 ~~|
-doorstroompercentage[vwo]=
-	0.95
+doorstroommbo:
+	mbo1,mbo2,mbo3
 	~	
 	~		|
+
+middelbaar beroepsonderwijs=A FUNCTION OF(middelbaar beroepsonderwijs,doorstroom mbo,\
+		opstroom mbohbo,vmbo slagingen) ~~|
+middelbaar beroepsonderwijs[mbo1]= INTEG (
+	vmbo slagingen - doorstroom mbo[mbo1],
+		) ~~|
+middelbaar beroepsonderwijs[mbo2]= INTEG (
+	doorstroom mbo[mbo1] - doorstroom mbo[mbo2] ,
+		) ~~|
+middelbaar beroepsonderwijs[mbo3]= INTEG (
+	doorstroom mbo[mbo2] - doorstroom mbo[mbo3],
+		) ~~|
+middelbaar beroepsonderwijs[mbo4]= INTEG (
+	doorstroom mbo[mbo3] - opstroom mbohbo[mbo4],
+		)
+	~	mensen
+	~		|
+
+middelbaar havo[havo1]= INTEG (
+	instroom havo-afstroom havovmbo[havo1]-opstroom havovwo[havo1],
+		Initiele waarden[havo1]) ~~|
+middelbaar havo[havo2]= INTEG (
+	doorstroom havo[havo1]+afstroom vwohavo[vwo1]+opstroom vmbohavo[vmbo1]-afstroom havovmbo\
+		[havo2]-opstroom havovwo[havo2],
+		Initiele waarden[havo2]) ~~|
+middelbaar havo[havo3]= INTEG (
+	doorstroom havo[havo2]+afstroom vwohavo[vwo2]+opstroom vmbohavo[vmbo2]-afstroom havovmbo\
+		[havo3]-opstroom havovwo[havo2],
+		Initiele waarden[havo3]) ~~|
+middelbaar havo[havo4]= INTEG (
+	doorstroom havo[havo3]+opstroom vmbohavo[vmbo3]+afstroom vwohavo[vwo3]-opstroom havovwo\
+		[havo4],
+		Initiele waarden[havo4]) ~~|
+middelbaar havo[havo5]= INTEG (
+	doorstroom havo[havo4]-opstroom havovwo[havo5]+afstroom vwohavo[vwo4] - havo slagingen\
+		,
+		Initiele waarden[havo5])
+	~	mensen
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+middelbaar vmbo[vmbo1]= INTEG (
+	instroom vmbo-opstroom vmbohavo[vmbo1],
+		Initiele waarden[vmbo1]) ~~|
+middelbaar vmbo[vmbo2]= INTEG (
+	doorstroom vmbo[vmbo1]+afstroom havovmbo[havo1]-opstroom vmbohavo[vmbo2],
+		Initiele waarden[vmbo2]) ~~|
+middelbaar vmbo[vmbo3]= INTEG (
+	doorstroom vmbo[vmbo2]+afstroom havovmbo[havo2]-opstroom vmbohavo[vmbo3],
+		Initiele waarden[vmbo3]) ~~|
+middelbaar vmbo[vmbo4]= INTEG (
+	doorstroom vmbo[vmbo3]+afstroom havovmbo[havo3]-opstroom vmbohavo[vmbo4] - vmbo slagingen\
+		,
+		Initiele waarden[vmbo4])
+	~	mensen
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+middelbaar vwo[vwo1]= INTEG (
+	instroom vwo-afstroom vwohavo[vwo1],
+		Initiele waarden[vwo1]) ~~|
+middelbaar vwo[vwo2]= INTEG (
+	doorstroom vwo[vwo1]+opstroom havovwo[havo1]-afstroom vwohavo[vwo2],
+		Initiele waarden[vwo2]) ~~|
+middelbaar vwo[vwo3]= INTEG (
+	doorstroom vwo[vwo2]+opstroom havovwo[havo2]-afstroom vwohavo[vwo3],
+		Initiele waarden[vwo3]) ~~|
+middelbaar vwo[vwo4]= INTEG (
+	doorstroom vwo[vwo3]+opstroom havovwo[havo3]-afstroom vwohavo[vwo4],
+		Initiele waarden[vwo4]) ~~|
+middelbaar vwo[vwo5]= INTEG (
+	doorstroom vwo[vwo4]+opstroom havovwo[havo4],
+		Initiele waarden[vwo5]) ~~|
+middelbaar vwo[vwo6]= INTEG (
+	doorstroom vwo[vwo5]+opstroom havovwo[havo5] - vwo slagingen naar hbo - vwo slagingen naar wo\
+		,
+		Initiele waarden[vwo6])
+	~	mensen
+	~		|
+
+afstroom wohbo[wo1]=
+	wetenschappelijk onderwijs[wo1]* Afstroompercentages[wo1]
+	~	
+	~		|
+
+opstroomwo:
+	wo1,wo2,wo3
+	~	
+	~		|
+
+havo slagingen=
+	middelbaar havo[havo4] * slagingspercentage[havo]
+	~	mensen/Year
+	~		|
+
+opstroom hbowo[hbo1]=
+	hoger beroepsonderwijs[hbo1]*Opstroom percentages[hbo1] ~~|
+opstroom hbowo[hbo4]=
+	hoger beroepsonderwijs[hbo4]*Opstroom percentages[hbo4]
+	~	mensen/Year
+	~		|
+
+doorstroom hbo[doorstroomhbo]=
+	hoger beroepsonderwijs[doorstroomhbo] * doorstroompercentage[doorstroomhbo]
+	~	mensen/Year
+	~		|
+
+doorstroom mbo[doorstroommbo]=
+	middelbaar beroepsonderwijs[doorstroommbo] * doorstroompercentage[doorstroommbo]
+	~	mensen/Year
+	~		|
+
+instroom havo=
+	DELAY3("4 jarige" * percentage instromers middelbare school[havo], tijdsduur basisschool\
+		 )
+	~	mensen/Year
+	~		|
+
+opstroomhbo:
+	hbo1,hbo2,hbo3,hbo4
+	~	
+	~		|
+
+doorstroom wo[doorstroomwo]=
+	wetenschappelijk onderwijs[doorstroomwo] * doorstroompercentage[doorstroomwo]
+	~	mensen/Year
+	~		|
+
+vwo slagingen naar wo=
+	middelbaar vwo[vwo6] * percentage vwo slagingen[wo1]
+	~	mensen/Year
+	~		|
+
+doorstroomhbo:
+	hbo1,hbo2,hbo3
+	~	
+	~		|
+
+hoger beroepsonderwijs=A FUNCTION OF(hoger beroepsonderwijs,afstroom wohbo,doorstroom hbo\
+		,havo slagingen,opstroom hbowo,opstroom mbohbo,vwo slagingen naar hbo) ~~|
+hoger beroepsonderwijs[hbo1]= INTEG (
+	vwo slagingen naar hbo + opstroom mbohbo[hbo1] + havo slagingen - opstroom hbowo[hbo1\
+		] - doorstroom hbo[hbo1],
+		) ~~|
+hoger beroepsonderwijs[hbo2]= INTEG (
+	doorstroom hbo[hbo1] - doorstroom hbo[hbo2],
+		) ~~|
+hoger beroepsonderwijs[hbo3]= INTEG (
+	doorstroom hbo[hbo2] - doorstroom hbo[hbo3],
+		) ~~|
+hoger beroepsonderwijs[hbo4]= INTEG (
+	doorstroom hbo[hbo3],
+		)
+	~	mensen
+	~		|
+
+percentage vwo slagingen=A FUNCTION OF(percentage vwo slagingen) ~~|
+percentage vwo slagingen[hbo1]= ~~|
+percentage vwo slagingen[wo1]=
+	~	1/Year
+	~		|
+
+vmbo slagingen=
+	middelbaar vmbo[vmbo4] * slagingspercentage[vmbo]
+	~	mensen/Year
+	~		|
+
+slagingspercentage=A FUNCTION OF(slagingspercentage) ~~|
+slagingspercentage[vmbo]= ~~|
+slagingspercentage[havo]=
+	~	1/Year
+	~		|
+
+doorstroomwo:
+	wo1,wo2
+	~	
+	~		|
+
+instroom vwo=
+	DELAY3("4 jarige"*percentage instromers middelbare school[vwo], tijdsduur basisschool\
+		 )
+	~	mensen/Year
+	~		|
+
+tijdsduur basisschool=
+	8
+	~	
+	~		|
+
+opstroom mbohbo[mbo4]=
+	middelbaar beroepsonderwijs[mbo4]*Opstroom percentages[mbo4]
+	~	mensen/Year
+	~		|
+
+wetenschappelijk onderwijs=A FUNCTION OF(wetenschappelijk onderwijs,afstroom wohbo,doorstroom wo\
+		,opstroom hbowo,vwo slagingen naar wo) ~~|
+wetenschappelijk onderwijs[wo1]= INTEG (
+	vwo slagingen naar wo + opstroom hbowo[hbo1] + opstroom hbowo[hbo4]- doorstroom wo[wo1\
+		] - afstroom wohbo[wo1],
+		) ~~|
+wetenschappelijk onderwijs[wo2]= INTEG (
+	doorstroom wo[wo1] - doorstroom wo[wo2],
+		) ~~|
+wetenschappelijk onderwijs[wo3]= INTEG (
+	doorstroom wo[wo2],
+		)
+	~	mensen
+	~		|
+
+opstroommbo:
+	mbo1,mbo2,mbo3,mbo4
+	~	
+	~		|
+
+vwo slagingen naar hbo=
+	middelbaar vwo[vwo6] * percentage vwo slagingen[hbo1]
+	~	mensen/Year
+	~		|
+
+opstroom vmbohavo[vmbo1]=
+	middelbaar vmbo[vmbo1]*Opstroom percentages[vmbo1] ~~|
+opstroom vmbohavo[vmbo2]=
+	middelbaar vmbo[vmbo2]*Opstroom percentages[vmbo2] ~~|
+opstroom vmbohavo[vmbo3]=
+	middelbaar vmbo[vmbo3]*Opstroom percentages[vmbo3] ~~|
+opstroom vmbohavo[vmbo4]=
+	middelbaar vmbo[vmbo4]*Opstroom percentages[vmbo4]
+	~	mensen/Year
+	~		|
+
+Initiele waarden[vmbo1]=
+	99150 ~~|
+Initiele waarden[vmbo2]=
+	98965 ~~|
+Initiele waarden[vmbo3]=
+	107038 ~~|
+Initiele waarden[vmbo4]=
+	108152 ~~|
+Initiele waarden[havo1]=
+	48743 ~~|
+Initiele waarden[havo2]=
+	48934 ~~|
+Initiele waarden[havo3]=
+	46303 ~~|
+Initiele waarden[havo4]=
+	63378 ~~|
+Initiele waarden[havo5]=
+	57136 ~~|
+Initiele waarden[vwo1]=
+	50998 ~~|
+Initiele waarden[vwo2]=
+	50868 ~~|
+Initiele waarden[vwo3]=
+	45396 ~~|
+Initiele waarden[vwo4]=
+	43764 ~~|
+Initiele waarden[vwo5]=
+	44696 ~~|
+Initiele waarden[vwo6]=
+	40017
+	~	mensen
+	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
+		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
+		G1,G3,G4,G5,G6,G2&STB=T&VW=T
+	|
+
+afstroom havovmbo[havo1]=
+	middelbaar havo[havo1]*Afstroompercentages[havo1] ~~|
+afstroom havovmbo[havo2]=
+	middelbaar havo[havo2]*Afstroompercentages[havo2] ~~|
+afstroom havovmbo[havo3]=
+	middelbaar havo[havo3]*Afstroompercentages[havo3]
+	~	mensen/Year
+	~		|
+
+afstroom vwohavo[vwo1]=
+	middelbaar vwo[vwo1]*Afstroompercentages[vwo1] ~~|
+afstroom vwohavo[vwo2]=
+	middelbaar vwo[vwo2]*Afstroompercentages[vwo2] ~~|
+afstroom vwohavo[vwo3]=
+	middelbaar vwo[vwo3]*Afstroompercentages[vwo3] ~~|
+afstroom vwohavo[vwo4]=
+	middelbaar vwo[vwo4]*Afstroompercentages[vwo4]
+	~	mensen/Year
+	~		|
+
+Afstroompercentages=A FUNCTION OF(Afstroompercentages) ~~|
+Afstroompercentages[havo1]=
+	0.103 ~~|
+Afstroompercentages[havo2]=
+	0.092 ~~|
+Afstroompercentages[havo3]=
+	0.065 ~~|
+Afstroompercentages[vwo1]=
+	0.049 ~~|
+Afstroompercentages[vwo2]=
+	0.053 ~~|
+Afstroompercentages[vwo3]=
+	0.083 ~~|
+Afstroompercentages[vwo4]=
+	0.0277 ~~|
+Afstroompercentages[wo1]=
+	~	Dmnl/Year
+	~	https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo\
+		-zit.jsp
+	|
+
+opstroom havovwo[havo1]=
+	middelbaar havo[havo1]*Opstroom percentages[havo1] ~~|
+opstroom havovwo[havo2]=
+	middelbaar havo[havo2]*Opstroom percentages[havo2] ~~|
+opstroom havovwo[havo3]=
+	middelbaar havo[havo3]*Opstroom percentages[havo3] ~~|
+opstroom havovwo[havo4]=
+	middelbaar havo[havo4]*Opstroom percentages[havo4] ~~|
+opstroom havovwo[havo5]=
+	middelbaar havo[havo5]*Opstroom percentages[havo5]
+	~	mensen/Year
+	~		|
+
+Opstroom percentages=A FUNCTION OF(Opstroom percentages) ~~|
+Opstroom percentages[vmbo1]=
+	0.061 ~~|
+Opstroom percentages[vmbo2]=
+	0.051 ~~|
+Opstroom percentages[vmbo3]=
+	0.012 ~~|
+Opstroom percentages[vmbo4]=
+	0.085 ~~|
+Opstroom percentages[havo1]=
+	0.059 ~~|
+Opstroom percentages[havo2]=
+	0.018 ~~|
+Opstroom percentages[havo3]=
+	0.1 ~~|
+Opstroom percentages[havo4]=
+	0.003 ~~|
+Opstroom percentages[havo5]=
+	0.054 ~~|
+Opstroom percentages[mbo4]= ~~|
+Opstroom percentages[hbo1]= ~~|
+Opstroom percentages[hbo4]=
+	~	Dmnl/Year
+	~	https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo\
+		-zit.jsp
+	|
+
+doorstroompercentage=A FUNCTION OF(doorstroompercentage) ~~|
+doorstroompercentage[vmbo1]=
+	0.944 ~~|
+doorstroompercentage[vmbo2]=
+	0.954 ~~|
+doorstroompercentage[vmbo3]=
+	0.94 ~~|
+doorstroompercentage[havo1]=
+	0.982 ~~|
+doorstroompercentage[havo2]=
+	0.954 ~~|
+doorstroompercentage[havo3]=
+	0.931 ~~|
+doorstroompercentage[havo4]=
+	0.864 ~~|
+doorstroompercentage[vwo1]=
+	0.984 ~~|
+doorstroompercentage[vwo2]=
+	0.974 ~~|
+doorstroompercentage[vwo3]=
+	0.97 ~~|
+doorstroompercentage[vwo4]=
+	0.912 ~~|
+doorstroompercentage[vwo5]=
+	0.902 ~~|
+doorstroompercentage[mbo1]= ~~|
+doorstroompercentage[mbo2]= ~~|
+doorstroompercentage[mbo3]= ~~|
+doorstroompercentage[hbo1]= ~~|
+doorstroompercentage[hbo2]= ~~|
+doorstroompercentage[hbo3]= ~~|
+doorstroompercentage[wo1]= ~~|
+doorstroompercentage[wo2]=
+	~	Dmnl/Year
+	~	https://duo.nl/open_onderwijsdata/databestanden/vo/leerlingen/leerlingen-vo\
+		-zit.jsp
+	|
 
 doorstroomvmbo:
 	vmbo1,vmbo2,vmbo3
@@ -28,18 +412,18 @@ Basisschoolleerlingen= INTEG (
 	|
 
 doorstroom havo[doorstroomhavo]=
-	middelbaar havo[doorstroomhavo]*doorstroompercentage[havo]
-	~	
+	middelbaar havo[doorstroomhavo]*doorstroompercentage[doorstroomhavo]
+	~	mensen/Year
 	~		|
 
 doorstroom vmbo[doorstroomvmbo]=
-	middelbaar vmbo[doorstroomvmbo]*doorstroompercentage[vmbo]
-	~	
+	middelbaar vmbo[doorstroomvmbo]*doorstroompercentage[doorstroomvmbo]
+	~	mensen/Year
 	~		|
 
 doorstroom vwo[doorstroomvwo]=
-	middelbaar vwo[doorstroomvwo] * doorstroompercentage[vwo]
-	~	
+	middelbaar vwo[doorstroomvwo] * doorstroompercentage[doorstroomvwo]
+	~	mensen/Year
 	~		|
 
 doorstroomhavo:
@@ -53,83 +437,14 @@ percentage instromers middelbare school[havo]=
 	0.3 ~~|
 percentage instromers middelbare school[vwo]=
 	0.2
-	~	
+	~	Dmnl/Year
 	~	verhouding vwo,havo,vmbo
 	|
 
-middelbaar vwo[vwo1]= INTEG (
-	instroom vwo,
-		46530) ~~|
-middelbaar vwo[vwo2]= INTEG (
-	doorstroom vwo[vwo1],
-		45385) ~~|
-middelbaar vwo[vwo3]= INTEG (
-	doorstroom vwo[vwo2],
-		45396) ~~|
-middelbaar vwo[vwo4]= INTEG (
-	doorstroom vwo[vwo3],
-		43764) ~~|
-middelbaar vwo[vwo5]= INTEG (
-	doorstroom vwo[vwo4],
-		44696) ~~|
-middelbaar vwo[vwo6]= INTEG (
-	doorstroom vwo[vwo5],
-		40017)
-	~	
-	~		|
-
-instroom havo=
-	DELAY3("4 jarige" * percentage instromers middelbare school[havo], 8 )
-	~	
-	~		|
-
-middelbaar havo[havo1]= INTEG (
-	instroom havo,
-		55000) ~~|
-middelbaar havo[havo2]= INTEG (
-	doorstroom havo[havo1],
-		55000) ~~|
-middelbaar havo[havo3]= INTEG (
-	doorstroom havo[havo2],
-		46303) ~~|
-middelbaar havo[havo4]= INTEG (
-	doorstroom havo[havo3],
-		63378) ~~|
-middelbaar havo[havo5]= INTEG (
-	doorstroom havo[havo4],
-		57136)
-	~	
-	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
-		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
-		G1,G3,G4,G5,G6,G2&STB=T&VW=T
-	|
-
-middelbaar vmbo[vmbo1]= INTEG (
-	instroom vmbo,
-		100000) ~~|
-middelbaar vmbo[vmbo2]= INTEG (
-	doorstroom vmbo[vmbo1],
-		100000) ~~|
-middelbaar vmbo[vmbo3]= INTEG (
-	doorstroom vmbo[vmbo2],
-		107038) ~~|
-middelbaar vmbo[vmbo4]= INTEG (
-	doorstroom vmbo[vmbo3],
-		108152)
-	~	
-	~	http://statline.cbs.nl/Statweb/publication/?DM=SLNL&PA=80040ned&D1=0,3,6-7,\
-		14-15,19-21,24-31,35-36,40,43,46,49&D2=0&D3=0-6&D4=0&D5=0&D6=0&D7=12,l&HDR=\
-		G1,G3,G4,G5,G6,G2&STB=T&VW=T
-	|
-
 instroom vmbo=
-	DELAY3("4 jarige"*percentage instromers middelbare school[vmbo], 8 )
-	~	
-	~		|
-
-instroom vwo=
-	DELAY3("4 jarige"*percentage instromers middelbare school[vwo], 8 )
-	~	
+	DELAY3("4 jarige"*percentage instromers middelbare school[vmbo], tijdsduur basisschool\
+		 )
+	~	mensen/Year
 	~		|
 
 "4 jarige"=
@@ -426,93 +741,204 @@ TIME STEP  = 0.0625
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
-$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,80,0
-10,1,Populatie,654,-291,40,20,3,3,0,0,0,0,0,0
-12,2,48,658,-93,10,8,0,3,0,0,-1,0,0,0
-1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(658,-139)|
-1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(658,-230)|
-11,5,48,658,-183,8,6,33,3,0,0,4,0,0,0
-10,6,sterfte,691,-183,25,11,40,3,0,0,-1,0,0,0
-1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(674,-440)|(674,-435)|(674,-373)|
-1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(840,-285)|(840,-285)|(767,-285)|
-11,9,1516,840,-440,6,8,34,3,0,0,1,0,0,0
-10,10,Ouder worden,840,-414,36,18,40,131,0,0,-1,0,0,0
-12,11,48,442,-288,10,8,0,3,0,0,-1,0,0,0
-1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(578,-288)|
-1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(491,-288)|
-11,14,48,537,-288,6,8,34,3,0,0,1,0,0,0
-10,15,Geboorte,537,-269,31,11,40,3,0,0,-1,0,0,0
-1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(598,-243)|
-10,17,Aantal jaar vruchtbaar,336,-237,35,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(467,-227)|
-10,19,Gemiddelde vruchtbaarheidscijfer,446,-443,66,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(516,-346)|
-10,21,Aandeel vruchtbare vrouwen,318,-359,62,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
-1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(479,-328)|
-1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(727,-226)|
-10,24,sterftekans,738,-59,36,11,8,3,0,0,0,0,0,0
-10,25,Initial population,827,-229,52,11,8,3,0,0,0,0,0,0
-1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(759,-103)|
-10,27,Total population,604,-640,51,11,8,3,0,0,0,0,0,0
-1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(630,-411)|
-1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(742,-349)|
-10,30,totale sterfte,907,-94,39,11,8,3,0,0,0,0,0,0
-1,31,6,30,1,0,0,0,0,64,0,-1--1--1,,1|(793,-172)|
-1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(752,-255)|
-10,33,Tijd per leeftijdsgroep,721,-528,43,19,8,3,0,0,0,0,0,0
-1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(775,-475)|
-10,35,Basisschoolleerlingen,335,337,72,30,3,131,0,0,0,0,0,0
-12,36,48,36,328,10,8,0,3,0,0,-1,0,0,0
-1,37,39,35,4,0,0,22,0,0,0,-1--1--1,,1|(212,328)|
-1,38,39,36,100,0,0,22,0,0,0,-1--1--1,,1|(97,328)|
-11,39,48,155,328,6,8,34,3,0,0,1,0,0,0
-10,40,"4 jarige",155,347,25,11,40,3,0,0,-1,0,0,0
-1,41,1,40,1,1,0,0,0,64,0,-1--1--1,,1|(465,38)|
-1,42,33,40,1,1,0,0,0,64,0,-1--1--1,,1|(126,-33)|
-10,43,middelbaar vmbo,696,142,61,26,3,131,0,0,0,0,0,0
-10,44,middelbaar havo,702,340,61,26,3,131,0,0,0,0,0,0
-10,45,middelbaar vwo,696,558,61,26,3,131,0,0,0,0,0,0
-1,46,48,44,4,0,0,22,0,0,0,-1--1--1,,1|(604,337)|
-1,47,48,35,100,0,0,22,0,0,0,-1--1--1,,1|(481,337)|
-11,48,0,561,337,6,8,34,3,0,0,1,0,0,0
-10,49,instroom havo,561,356,45,11,40,3,0,0,-1,0,0,0
-1,50,52,43,4,0,0,22,0,0,0,-1--1--1,,3|(492,137)|(513,137)|(574,137)|
-1,51,52,35,100,0,0,22,0,0,0,-1--1--1,,1|(492,337)|
-11,52,0,492,229,8,6,33,3,0,0,4,0,0,0
-10,53,instroom vmbo,547,229,47,11,40,3,0,0,-1,0,0,0
-1,54,56,45,4,0,0,22,0,0,0,-1--1--1,,3|(492,532)|(492,532)|(492,558)|
-1,55,56,35,100,0,0,22,0,0,0,-1--1--1,,1|(492,337)|
-11,56,0,492,455,8,6,33,3,0,0,4,0,0,0
-10,57,instroom vwo,543,455,43,11,40,3,0,0,-1,0,0,0
-10,58,percentage instromers middelbare school,347,209,70,19,8,3,0,0,0,0,0,0
-1,59,58,52,1,0,0,0,0,128,0,-1--1--1,,1|(446,227)|
-10,60,percentage instromers middelbare school,603,403,74,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
-1,61,60,57,0,0,0,0,0,128,0,-1--1--1,,1|(573,428)|
-1,62,60,49,0,0,0,0,0,128,0,-1--1--1,,1|(583,380)|
-1,63,65,43,4,0,0,22,0,0,0,-1--1--1,,3|(743,26)|(654,26)|(654,71)|
-1,64,65,43,100,0,0,22,0,0,0,-1--1--1,,1|(743,89)|
-11,65,0,743,54,6,8,34,3,0,0,1,0,0,0
-10,66,doorstroom vmbo,743,73,57,11,40,3,0,0,-1,0,0,0
-1,67,69,44,4,0,0,22,0,0,0,-1--1--1,,3|(746,221)|(660,221)|(660,267)|
-1,68,69,44,100,0,0,22,0,0,0,-1--1--1,,1|(746,290)|
-11,69,0,746,258,6,8,34,3,0,0,1,0,0,0
-10,70,doorstroom havo,746,277,54,11,40,3,0,0,-1,0,0,0
-1,71,73,45,4,0,0,22,0,0,0,-1--1--1,,3|(740,452)|(645,452)|(645,492)|
-1,72,73,45,100,0,0,22,0,0,0,-1--1--1,,1|(740,508)|
-11,73,0,740,477,6,8,34,131,0,0,1,0,0,0
-10,74,doorstroom vwo,740,496,53,11,40,3,0,0,-1,0,0,0
-10,75,doorstroompercentage,885,78,40,20,8,3,0,0,0,0,0,0
-10,76,doorstroompercentage,881,265,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
-10,77,doorstroompercentage,863,481,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
-1,78,75,66,1,0,0,0,0,128,0,-1--1--1,,1|(810,45)|
-1,79,76,70,1,0,0,0,0,128,0,-1--1--1,,1|(798,249)|
-1,80,77,74,1,0,0,0,0,128,0,-1--1--1,,1|(780,460)|
-1,81,43,66,0,0,0,0,0,128,0,-1--1--1,,1|(720,105)|
-1,82,44,70,0,0,0,0,0,128,0,-1--1--1,,1|(725,306)|
-1,83,45,74,0,0,0,0,0,128,0,-1--1--1,,1|(718,525)|
-1,84,40,53,1,0,0,0,0,64,0,-1--1--1,,1|(331,282)|
-1,85,40,49,1,0,0,0,0,64,0,-1--1--1,,1|(338,383)|
-1,86,40,57,1,0,0,0,0,64,0,-1--1--1,,1|(342,419)|
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,60,0
+10,1,Populatie,290,-521,40,20,3,3,0,0,0,0,0,0
+12,2,48,294,-323,10,8,0,3,0,0,-1,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(294,-369)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(294,-460)|
+11,5,48,294,-413,8,6,33,3,0,0,4,0,0,0
+10,6,sterfte,327,-413,25,11,40,3,0,0,-1,0,0,0
+1,7,9,1,4,0,0,22,0,0,0,-1--1--1,,3|(310,-670)|(310,-665)|(310,-603)|
+1,8,9,1,100,0,0,22,0,0,0,-1--1--1,,3|(476,-515)|(476,-515)|(403,-515)|
+11,9,1324,476,-670,6,8,34,3,0,0,1,0,0,0
+10,10,Ouder worden,476,-644,36,18,40,131,0,0,-1,0,0,0
+12,11,48,78,-518,10,8,0,3,0,0,-1,0,0,0
+1,12,14,1,4,0,0,22,0,0,0,-1--1--1,,1|(215,-518)|
+1,13,14,11,100,0,0,22,0,0,0,-1--1--1,,1|(128,-518)|
+11,14,48,173,-518,6,8,34,3,0,0,1,0,0,0
+10,15,Geboorte,173,-499,31,11,40,3,0,0,-1,0,0,0
+1,16,1,15,1,0,0,0,0,128,0,-1--1--1,,1|(234,-473)|
+10,17,Aantal jaar vruchtbaar,-28,-467,35,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,18,17,15,1,0,0,0,0,128,0,-1--1--1,,1|(103,-457)|
+10,19,Gemiddelde vruchtbaarheidscijfer,82,-673,66,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,20,19,14,1,0,0,0,0,128,0,-1--1--1,,1|(152,-576)|
+10,21,Aandeel vruchtbare vrouwen,-46,-589,62,19,8,3,0,2,0,0,0,0,-1--1--1,0-0-0,|12||255-0-0
+1,22,21,14,1,0,0,0,0,128,0,-1--1--1,,1|(115,-558)|
+1,23,1,6,1,0,0,0,0,128,0,-1--1--1,,1|(363,-456)|
+10,24,sterftekans,374,-289,36,11,8,3,0,0,0,0,0,0
+10,25,Initial population,463,-459,52,11,8,3,0,0,0,0,0,0
+1,26,24,6,1,0,0,0,0,128,0,-1--1--1,,1|(395,-333)|
+10,27,Total population,240,-870,51,11,8,3,0,0,0,0,0,0
+1,28,1,27,1,0,0,0,0,128,0,-1--1--1,,1|(266,-641)|
+1,29,1,10,0,0,0,0,0,64,0,-1--1--1,,1|(378,-579)|
+10,30,totale sterfte,543,-324,39,11,8,3,0,0,0,0,0,0
+1,31,6,30,1,0,0,0,0,64,0,-1--1--1,,1|(429,-402)|
+1,32,25,1,0,0,0,0,0,64,1,-1--1--1,,1|(388,-485)|
+10,33,Tijd per leeftijdsgroep,357,-758,43,19,8,3,0,0,0,0,0,0
+1,34,33,10,0,0,0,0,0,64,0,-1--1--1,,1|(411,-705)|
+10,35,Basisschoolleerlingen,-49,341,72,30,3,131,0,0,0,0,0,0
+12,36,48,-348,198,10,8,0,3,0,0,-1,0,0,0
+1,37,39,35,4,0,0,22,0,0,0,-1--1--1,,1|(-172,332)|
+1,38,39,36,100,0,0,22,0,0,0,-1--1--1,,1|(-348,332)|
+11,39,48,-229,332,6,8,34,3,0,0,1,0,0,0
+10,40,"4 jarige",-229,351,25,11,40,3,0,0,-1,0,0,0
+1,41,1,40,1,1,0,0,0,64,0,-1--1--1,,1|(78,-10)|
+1,42,33,40,1,1,0,0,0,64,0,-1--1--1,,1|(-258,-29)|
+10,43,middelbaar vmbo,398,14,94,33,3,131,0,0,0,0,0,0
+10,44,middelbaar havo,406,360,92,45,3,131,0,0,0,0,0,0
+10,45,middelbaar vwo,402,704,93,33,3,131,0,0,0,0,0,0
+1,46,48,44,4,0,0,22,0,0,0,-1--1--1,,1|(257,341)|
+1,47,48,35,100,0,0,22,0,0,0,-1--1--1,,1|(106,341)|
+11,48,284,195,341,6,8,34,131,0,0,1,0,0,0
+10,49,instroom havo,195,360,45,11,40,3,0,0,-1,0,0,0
+1,50,52,43,4,0,0,22,0,0,0,-1--1--1,,3|(108,11)|(128,11)|(216,11)|
+1,51,52,35,100,0,0,22,0,0,0,-1--1--1,,1|(108,341)|
+11,52,652,108,233,8,6,33,3,0,0,4,0,0,0
+10,53,instroom vmbo,163,233,47,11,40,3,0,0,-1,0,0,0
+1,54,56,45,4,0,0,22,0,0,0,-1--1--1,,3|(108,698)|(109,698)|(209,698)|
+1,55,56,35,100,0,0,22,0,0,0,-1--1--1,,1|(108,341)|
+11,56,620,108,597,8,6,33,3,0,0,4,0,0,0
+10,57,instroom vwo,159,597,43,11,40,3,0,0,-1,0,0,0
+10,58,percentage instromers middelbare school,0,128,70,19,8,3,0,0,0,0,0,0
+1,59,58,52,1,0,0,0,0,128,0,-1--1--1,,1|(97,180)|
+10,60,percentage instromers middelbare school,195,479,74,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,61,60,57,0,0,0,0,0,128,0,-1--1--1,,1|(179,535)|
+1,62,60,49,0,0,0,0,0,128,0,-1--1--1,,1|(195,422)|
+1,63,65,43,4,0,0,22,0,0,0,-1--1--1,,3|(390,-109)|(323,-109)|(323,-64)|
+1,64,65,43,100,0,0,22,0,0,0,-1--1--1,,1|(390,-45)|
+11,65,780,390,-78,6,8,34,3,0,0,1,0,0,0
+10,66,doorstroom vmbo,390,-59,57,11,40,3,0,0,-1,0,0,0
+1,67,69,44,4,0,0,22,0,0,0,-1--1--1,,3|(382,222)|(327,222)|(327,268)|
+1,68,69,44,100,0,0,22,0,0,0,-1--1--1,,1|(382,288)|
+11,69,636,382,253,6,8,34,3,0,0,1,0,0,0
+10,70,doorstroom havo,382,272,54,11,40,3,0,0,-1,0,0,0
+1,71,73,45,4,0,0,22,0,0,0,-1--1--1,,3|(381,583)|(318,583)|(318,627)|
+1,72,73,45,100,0,0,22,0,0,0,-1--1--1,,1|(381,650)|
+11,73,668,381,621,6,8,34,131,0,0,1,0,0,0
+10,74,doorstroom vwo,381,640,53,11,40,3,0,0,-1,0,0,0
+10,75,doorstroompercentage,374,-171,40,20,8,3,0,0,0,0,0,0
+10,76,doorstroompercentage,324,167,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,77,doorstroompercentage,345,540,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,78,75,66,1,0,0,0,0,128,0,-1--1--1,,1|(431,-114)|
+1,79,76,70,1,0,0,0,0,128,0,-1--1--1,,1|(393,196)|
+1,80,77,74,1,0,0,0,0,128,0,-1--1--1,,1|(407,594)|
+1,81,43,66,1,0,0,0,0,128,0,-1--1--1,,1|(407,-29)|
+1,82,44,70,0,0,0,0,0,128,0,-1--1--1,,1|(391,305)|
+1,83,45,74,1,0,0,0,0,128,0,-1--1--1,,1|(359,665)|
+1,84,40,53,1,0,0,0,0,64,0,-1--1--1,,1|(-59,270)|
+1,85,40,49,1,0,0,0,0,64,0,-1--1--1,,1|(-49,409)|
+1,86,40,57,1,0,0,0,0,64,0,-1--1--1,,1|(-87,454)|
+10,87,Initiele waarden,290,80,50,11,8,3,0,0,0,0,0,0
+1,88,87,43,1,0,0,0,0,64,1,-1--1--1,,1|(318,78)|
+10,89,Afstroompercentages,697,203,40,20,8,3,0,0,0,0,0,0
+10,90,Opstroom percentages,539,99,39,19,8,3,0,0,0,0,0,0
+1,91,93,45,4,0,0,22,0,0,0,-1--1--1,,3|(450,615)|(450,615)|(450,643)|
+1,92,93,44,100,0,0,22,0,0,0,-1--1--1,,1|(450,468)|
+11,93,188,450,538,8,6,33,3,0,0,4,0,0,0
+10,94,opstroom havovwo,489,538,31,19,40,3,0,0,-1,0,0,0
+1,95,97,44,4,0,0,22,0,0,0,-1--1--1,,3|(589,401)|(539,401)|(518,401)|
+1,96,97,45,100,0,0,22,0,0,0,-1--1--1,,1|(538,683)|
+11,97,396,589,683,8,6,33,3,0,0,4,0,0,0
+10,98,afstroom vwohavo,635,683,38,16,40,131,0,0,-1,0,0,0
+1,99,101,44,4,0,0,22,0,0,0,-1--1--1,,3|(448,219)|(448,219)|(448,267)|
+1,100,101,43,100,0,0,22,0,0,0,-1--1--1,,1|(448,101)|
+11,101,332,448,162,8,6,33,3,0,0,4,0,0,0
+10,102,opstroom vmbohavo,490,162,34,19,40,3,0,0,-1,0,0,0
+1,103,105,43,4,0,0,22,0,0,0,-1--1--1,,3|(592,37)|(561,37)|(526,37)|
+1,104,105,44,100,0,0,22,0,0,0,-1--1--1,,1|(541,325)|
+11,105,140,592,325,8,6,33,3,0,0,4,0,0,0
+10,106,afstroom havovmbo,634,325,34,19,40,3,0,0,-1,0,0,0
+1,107,45,98,1,0,0,0,0,64,0,-1--1--1,,1|(547,662)|
+1,108,89,106,0,0,0,0,0,64,0,-1--1--1,,1|(668,258)|
+1,109,44,106,1,0,0,0,0,64,0,-1--1--1,,1|(538,300)|
+1,110,43,102,1,0,0,0,0,64,0,-1--1--1,,1|(470,86)|
+1,111,90,102,0,0,0,0,0,64,0,-1--1--1,,1|(519,125)|
+1,112,44,94,1,0,0,0,0,64,0,-1--1--1,,1|(478,440)|
+10,113,Initiele waarden,325,449,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+10,114,Initiele waarden,270,776,59,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,115,114,45,0,0,0,0,0,128,1,-1--1--1,,1|(309,754)|
+1,116,113,44,0,0,0,0,0,128,1,-1--1--1,,1|(345,426)|
+10,117,Afstroompercentages,710,630,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,118,117,98,0,0,0,0,0,128,0,-1--1--1,,1|(675,654)|
+10,119,Opstroom percentages,540,465,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,120,119,94,0,0,0,0,0,128,0,-1--1--1,,1|(518,495)|
+10,121,middelbaar beroepsonderwijs,1126,33,118,41,3,131,0,0,0,0,0,0
+10,122,hoger beroepsonderwijs,1120,373,119,43,3,131,0,0,0,0,0,0
+10,123,wetenschappelijk onderwijs,1125,704,121,44,3,131,0,0,0,0,0,0
+1,124,126,123,4,0,0,22,0,0,0,-1--1--1,,3|(1071,569)|(1007,569)|(1007,614)|
+1,125,126,123,100,0,0,22,0,0,0,-1--1--1,,1|(1071,636)|
+11,126,0,1071,605,6,8,34,3,0,0,1,0,0,0
+10,127,doorstroom wo,1071,624,49,11,40,3,0,0,-1,0,0,0
+1,128,130,122,4,0,0,22,0,0,0,-1--1--1,,3|(1063,242)|(1005,242)|(1005,286)|
+1,129,130,122,100,0,0,22,0,0,0,-1--1--1,,1|(1063,308)|
+11,130,0,1063,278,6,8,34,3,0,0,1,0,0,0
+10,131,doorstroom hbo,1063,297,51,11,40,3,0,0,-1,0,0,0
+1,132,134,121,4,0,0,22,0,0,0,-1--1--1,,3|(1075,-86)|(1015,-86)|(1015,-47)|
+1,133,134,121,100,0,0,22,0,0,0,-1--1--1,,1|(1075,-30)|
+11,134,0,1075,-60,6,8,34,3,0,0,1,0,0,0
+10,135,doorstroom mbo,1075,-41,53,11,40,3,0,0,-1,0,0,0
+10,136,doorstroompercentage,1030,-154,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+10,137,doorstroompercentage,1041,192,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+10,138,doorstroompercentage,1044,517,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,139,136,134,1,0,0,0,0,128,0,-1--1--1,,1|(1102,-103)|
+1,140,137,130,1,0,0,0,0,128,0,-1--1--1,,1|(1102,250)|
+1,141,138,126,1,0,0,0,0,128,0,-1--1--1,,1|(1100,568)|
+1,142,123,127,0,0,0,0,0,128,0,-1--1--1,,1|(1091,653)|
+1,143,122,131,0,0,0,0,0,128,0,-1--1--1,,1|(1083,324)|
+1,144,121,135,0,0,0,0,0,128,0,-1--1--1,,1|(1094,-14)|
+1,145,147,122,4,0,0,22,0,0,0,-1--1--1,,1|(1123,269)|
+1,146,147,121,100,0,0,22,0,0,0,-1--1--1,,1|(1123,135)|
+11,147,0,1123,202,8,6,33,3,0,0,4,0,0,0
+10,148,opstroom mbohbo,1178,202,47,18,40,131,0,0,-1,0,0,0
+1,149,151,123,4,0,0,22,0,0,0,-1--1--1,,1|(1121,602)|
+1,150,151,122,100,0,0,22,0,0,0,-1--1--1,,1|(1121,474)|
+11,151,0,1121,538,8,6,33,3,0,0,4,0,0,0
+10,152,opstroom hbowo,1178,538,49,19,40,131,0,0,-1,0,0,0
+1,153,121,148,1,0,0,0,0,128,0,-1--1--1,,1|(1174,133)|
+1,154,122,152,1,0,0,0,0,128,0,-1--1--1,,1|(1171,484)|
+10,155,Opstroom percentages,1284,156,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+10,156,Opstroom percentages,1298,486,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,157,155,148,1,0,0,0,0,128,0,-1--1--1,,1|(1230,200)|
+1,158,156,152,1,0,0,0,0,128,0,-1--1--1,,1|(1251,529)|
+1,159,161,121,4,0,0,22,0,0,0,-1--1--1,,1|(898,17)|
+1,160,161,43,100,0,0,22,0,0,0,-1--1--1,,1|(634,17)|
+11,161,0,782,17,6,8,34,3,0,0,1,0,0,0
+10,162,vmbo slagingen,782,36,48,11,40,3,0,0,-1,0,0,0
+1,163,165,122,4,0,0,22,0,0,0,-1--1--1,,1|(897,359)|
+1,164,165,44,100,0,0,22,0,0,0,-1--1--1,,1|(639,359)|
+11,165,0,787,359,6,8,34,3,0,0,1,0,0,0
+10,166,havo slagingen,787,385,66,18,40,131,0,0,-1,0,0,0
+1,167,169,123,4,0,0,22,0,0,0,-1--1--1,,1|(895,728)|
+1,168,169,45,100,0,0,22,0,0,0,-1--1--1,,1|(634,728)|
+11,169,0,780,728,6,8,34,3,0,0,1,0,0,0
+10,170,vwo slagingen naar wo,780,755,66,19,40,131,0,0,-1,0,0,0
+1,171,173,122,4,0,0,22,0,0,0,-1--1--1,,3|(783,406)|(850,406)|(925,406)|
+1,172,173,45,100,0,0,22,0,0,0,-1--1--1,,1|(783,704)|
+11,173,0,783,557,8,6,33,3,0,0,4,0,0,0
+10,174,vwo slagingen naar hbo,836,557,45,19,40,3,0,0,-1,0,0,0
+10,175,percentage vwo slagingen,852,641,51,19,8,3,0,0,0,0,0,0
+1,176,175,169,1,0,0,0,0,128,0,-1--1--1,,1|(834,690)|
+1,177,175,174,1,0,0,0,0,128,0,-1--1--1,,1|(855,609)|
+10,178,slagingspercentage,763,-102,58,11,8,3,0,0,0,0,0,0
+1,179,178,161,1,0,0,0,0,128,0,-1--1--1,,1|(793,-28)|
+10,180,slagingspercentage,818,265,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,181,180,165,1,0,0,0,0,128,0,-1--1--1,,1|(817,319)|
+10,182,tijdsduur basisschool,178,164,55,23,8,131,0,0,0,0,0,0
+1,183,182,53,0,0,0,0,0,64,0,-1--1--1,,1|(171,197)|
+10,184,tijdsduur basisschool,9,454,42,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,185,184,49,1,0,0,0,0,128,0,-1--1--1,,1|(145,420)|
+1,186,184,57,1,0,0,0,0,128,0,-1--1--1,,1|(135,534)|
+1,187,45,170,1,0,0,0,0,128,0,-1--1--1,,1|(646,769)|
+1,188,44,166,1,0,0,0,0,128,0,-1--1--1,,1|(657,387)|
+1,189,43,161,1,0,0,0,0,128,0,-1--1--1,,1|(628,-27)|
+1,190,45,173,1,0,0,0,0,128,0,-1--1--1,,1|(663,587)|
+1,191,193,122,4,0,0,22,0,0,0,-1--1--1,,3|(1395,397)|(1375,397)|(1307,397)|
+1,192,193,123,100,0,0,22,0,0,0,-1--1--1,,1|(1316,671)|
+11,193,0,1395,671,8,6,33,3,0,0,4,0,0,0
+10,194,afstroom wohbo,1455,671,52,11,40,3,0,0,-1,0,0,0
+10,195,Afstroompercentages,1471,571,40,20,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128
+1,196,195,194,1,0,0,0,0,128,0,-1--1--1,,1|(1465,641)|
+1,197,123,194,1,0,0,0,0,128,0,-1--1--1,,1|(1374,692)|
 ///---\\\
 :L<%^E!@
 1:Current2.vdf
@@ -520,7 +946,7 @@ $192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,8
 1:Current.vdf
 9:Current2
 15:0,0,0,0,0,0
-19:80,0
+19:60,0
 27:0,
 34:0,
 4:Time
