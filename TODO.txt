@@ -83,6 +83,8 @@ hoe zit het met de units en de delayerrors? wat is de inflow van een delay fixed
 
 CLD: loop met enerzijds versterkend, anderzijds neutraliserend
 
+immigratie en emigratie in leeftijdscategorie 25 tot 40. emigratie is percentage van bevolking, immigratie trendlijn
+
 
 
 
@@ -116,7 +118,8 @@ percentage switchers --> moeilijkhijdsgraad VO
 opstroom, afstroom, doorstroom percentages --> moeilijkheidsgraad VO
 percentage doorstuderen --> BBP
 tijdsduur van onderwijs groter maken naarmate moeilijker, etc. IPV slagingspercentage.
-
+sterftekans --> bbp
+vruchtbaarheidscijfer --> bbp
 
 slagingspercentages --> onderwijsniveau
 
@@ -124,7 +127,7 @@ slagingspercentages --> onderwijsniveau
 toevoegen:
 
 immi+emigratie?
-
+toegevoegd, op basis van leeftijd 25 tot 40
 
 
 
