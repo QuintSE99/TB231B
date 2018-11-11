@@ -73,14 +73,11 @@ premaster = 1 jaar
 womaster = 2 jaar
 pensioenleeftijd op 65
 sterfte in werkenden gebaseerd op gemiddelde van 25 t/m 50 jaar
+voor vereenvoudiging na mbo/hbo/wo werken
 
-weging onderwijs:
-vwo = 1.5
-mbo = 1
-hbo = 2.5
-wo = 3.5
-hbomaster = 4
-womaster = 5
+aannames:
+
+slagingspercentages blijven gelijk door n-term op VO
 
 hoe zit het met de units en de delayerrors? wat is de inflow van een delay fixed, hoe initiële waarde
 
@@ -98,8 +95,34 @@ niet van hbo naar mbo
 alleen van wo1 naar hbo1, geen andere jaren
 alleen na mbo4 naar hbo1 mogelijk
 
-MISSCHIEN gaat het fout bij het volgende:
 
-moeten we osptromers van bijv. havo2 af laten gaan van havo 2 stock, of van havo 3 stock.
-in ons geval zit ie bij de havo 2 stock, maar wellicht is dat de fout.
-ik denk het eerlijk gezegd niet eigenlijk ... ._.
+
+
+percentage wo afstudeerslagingen
+percentage switchers per jaar (hoeveel % kiest er per jaar een andere opleiding
+in mbo/hbo/wo)
+
+hoeveel mensen per jaar (%) gaan er na 1 jaar hbo naar uni
+
+initiele waardes mbo hbo wo, hbo afstuderen, wo afstuderen,
+
+
+
+
+
+afhankelijk maken:
+instroom VO --> onderwijsniveau
+percentage switchers --> moeilijkhijdsgraad VO
+opstroom, afstroom, doorstroom percentages --> moeilijkheidsgraad VO
+
+
+slagingspercentages --> onderwijsniveau
+
+
+toevoegen:
+
+immi+emigratie?
+
+
+
+
