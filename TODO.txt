@@ -114,6 +114,8 @@ afhankelijk maken:
 instroom VO --> onderwijsniveau
 percentage switchers --> moeilijkhijdsgraad VO
 opstroom, afstroom, doorstroom percentages --> moeilijkheidsgraad VO
+percentage doorstuderen --> BBP
+tijdsduur van onderwijs groter maken naarmate moeilijker, etc. IPV slagingspercentage.
 
 
 slagingspercentages --> onderwijsniveau
