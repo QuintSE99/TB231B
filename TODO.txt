@@ -3,22 +3,16 @@
 12 November - deadline
 
 
-Delay fixed voor overgang naar studenten? hoe houden we rekening met zittenblijvers dan
-delay3 gebruiken met stock als inflow * percentage
+
 
 
 
 In ons model kunnen switchers heen en weer switchen (havo->vmbo->havo)
 
 
-Houden we rekening met werkende studenten? hoe?
 
 
-wat doen we met havo/vwo leerlingen ? havo of vwo?
 
-
-doorstroomfactor / doorstudeer factor / werkfactor, hoe modelleren we 
-dat die goed samen lopen en niet meer zijn dan 1
 
 
 
@@ -66,8 +60,6 @@ vmbo/havo/vwo = 4/5/6 jaar
 zittenblijvers geen rekening mee gehouden
 geen rekening gehouden met mensen die van wo naar hbo gaan
 vmbo moet nog studeren, havo moet ook nog studeren (leerplicht)
-sterftecijfer jonge studenten en oude studenten gelijk
-sterftecijfer middelbaar is een gemiddelde (vrijwel alle)
 hbomaster = 2 jaar
 premaster = 1 jaar
 womaster = 2 jaar
@@ -114,14 +106,21 @@ initiele waardes mbo hbo wo, hbo afstuderen, wo afstuderen,
 
 afhankelijk maken:
 instroom VO --> onderwijsniveau
-percentage switchers --> moeilijkhijdsgraad VO
 opstroom, afstroom, doorstroom percentages --> moeilijkheidsgraad VO
+vruchtbaarheidscijfer --> bbp
 percentage doorstuderen --> BBP
+percentage switchers --> moeilijkhijdsgraad VO
+
+
+
+
+
 tijdsduur van onderwijs groter maken naarmate moeilijker, etc. IPV slagingspercentage.
 sterftekans --> bbp
-vruchtbaarheidscijfer --> bbp
 
-slagingspercentages --> onderwijsniveau
+
+
+immigratie --> bbp
 
 
 toevoegen:
